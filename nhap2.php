@@ -1,3 +1,4 @@
 <?php
-echo 'hello wednesday";
+echo "hello wednesday";
+echo "hj";
 
