@@ -56,7 +56,7 @@
      <div class="form-group">
       <label class="control-label col-sm-2" >Loại công việc:</label>
       <div class="col-sm-10" > 
-        <select  class="form-control" name="times_id">
+        <select  class="form-control" name="time_id">
             @foreach($Times as $time)
            <option value="{{$time->id_time}}">{{$time->detail}}</option>
            @endforeach
@@ -74,7 +74,7 @@
     <div class="form-group">
       <label class="control-label col-sm-2" >Hạn nộp hồ sơ:</label>
       <div class="col-sm-4">          
-        <input type="date" class="form-control"  placeholder="Enter password" name="expired">
+        <input type="date" class="form-control"  placeholder="02/03/2018" name="expired">
       </div>
     </div>
 

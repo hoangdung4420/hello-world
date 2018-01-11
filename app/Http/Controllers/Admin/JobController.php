@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\JobAddRequest;
 use App\Job;
 use App\Category;
+use Auth;
 class JobController extends Controller
 {
     public function index()
@@ -34,8 +35,34 @@ class JobController extends Controller
     public function postAdd(Request $request)
     {
     	$oItem = new Job;
-    	
-    	dd($oItem);
+        $oItem->user_id = Auth::user()->id;
+        $oItem->title = $request->title;
+        $oItem->job_level = $request->job_level;
+        $oItem->job_categories = $request->job_categories;
+        $oItem->address = $request->address;
+        $oItem->salary = $request->salary;
+        $oItem->time_id = $request->time_id;
+        $oItem->preview = $request->preview;
+        $oItem->required = $request->required;
+        $oItem->agency = $request->agency;
+        $oItem->email = $request->email;
+        $oItem->phone = $request->phone;
+        $oItem->expired = $request->expired;
+        $oItem->active = 0;
+        if(Auth::user()->level_id){
+           $oItem->reader = $request->reader;
+            if(isset($request->feature)){
+                $oItem->feature = 1;
+            }else{
+                $oItem->feature = 0;
+            }
+        }
+    	$result = $oItem->save();
+        if($result){
+            $request->session()->flash('msgS','Thêm thành công');
+        }else{
+            $request->session()->flash('msgW','Có lỗi khi thêm');
+        }
     	return redirect()->route('admin.job.index');
     }
 }
