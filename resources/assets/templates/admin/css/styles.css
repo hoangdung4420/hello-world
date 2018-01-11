@@ -1,0 +1,35 @@
+.rep-comment{
+	border-left: 3px solid #244367;
+	padding-left: 5px;
+	color: #777;
+}
+.center .count-job{
+	font-size: 18px;
+}
+.center tr th{
+	text-align: center;
+}
+.center tr td{
+	text-align: center;
+}
+.imgComany{
+	float: left;
+}
+#formS div{
+	padding-left: 2px;
+	padding-right: 2px;
+}
+.ul_candidate{
+	padding-left: 0px;
+	margin: 0px;
+	float: left;
+}
+.ul_candidate li{
+	display: inline-block;
+}
+.cat_candidate{
+	border: 1px solid #999; 
+	padding: 5px; 
+	margin: 3px;
+	background: #eee
+}

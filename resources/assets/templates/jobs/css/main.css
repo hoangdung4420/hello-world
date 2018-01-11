@@ -1,0 +1,129 @@
+
+div.space{
+	padding-bottom: 80px;
+}
+a:hover{
+	text-decoration: none;
+}
+#formSearch div{
+	padding-left: 2px;
+	padding-right: 2px;
+}
+#formSearch input,#formSearch select{
+	height: 55px;
+
+}
+
+li.well{
+	padding-bottom: 20px;
+	margin-bottom: 0px;
+}
+#icon-title{
+	font-size: 25px;
+	color: #7a7a7a;
+}
+
+btn-danger{
+	background: #b72d2d;
+}
+#navbar ul li a{
+	font-size: 15px;
+	color: #333;
+}
+#navbar ul li.active a{
+	color: #fff;
+	background: #81d742;
+}
+#sumary{
+	color:#8598b0;
+	background: #e1ece9;
+	margin-bottom: 0px;
+}
+div.detail_jop{
+	padding-top: 0px; 
+	padding-bottom: 0px; 
+}
+div.content-page{
+	padding-left: 15px;
+}
+div.content-page div.title{
+	border-bottom:1px solid #aaa;
+}
+div.content-page div.row{
+	border-bottom:1px solid #aaa;
+	margin-bottom: 0px;
+}
+div.content-page div.row:hover{
+	border-bottom:1px solid #26ae61;
+	border-top:1px solid #26ae61;
+	background: #f4fbf7;
+}
+div.content-page div.adv{
+	padding:10px !important;
+}
+div.content-page div.adv:hover{
+	background: #eee;
+}
+img.thumbnail{
+	margin-top: 10px
+}
+.jops a{
+	color:#333;
+}
+
+.footer{
+	background: #091515;
+	color:#aaa;
+}
+.footer a{
+	color:#aaa;
+}
+.footer h3{
+	padding-left: 40px
+}
+
+ul li{
+	list-style: none;
+}
+div.jops{
+	margin: 0px;
+	background: #d6e4e0;
+}
+div.button{
+	padding-top: 50px
+}
+.detail_jop{
+	margin: 0px;
+	background: #fff
+}
+.list-jop{
+	margin: 0px;
+}
+.list-company .company:hover{
+	background: #eee;
+}
+#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  background-color: #373c43;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+#myBtn:hover {
+  background-color: #555;
+}
+				
+.list-cate ul{
+	padding-left: 0px;
+}
+.list-cate ul li{
+	line-height: 25px;
+}			
