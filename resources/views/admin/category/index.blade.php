@@ -1,6 +1,7 @@
 @extends('templates.admin.master')
 @section('content')
 <div class="container">
+
    @if(Session::get('msgS') != null)
        <div class="alert alert-success">{{ Session::get('msgS') }}</div>
    @elseif(Session::get('msgW') != null)
@@ -8,8 +9,9 @@
     @endif
 </div>
 <div class="container panel">
+    <br>
 <div class="col-sm-3">
-  <div class="panel panel-default">
+  <div class="panel-default">
     <div class="panel-body" id="form_cat">
       <form action="{{ route('admin.category.add') }}" method="POST">
         {{ csrf_field() }}
@@ -23,7 +25,7 @@
           </div>
           @endif
           <div class="col-sm-12">
-            <h4 class="text-success" style="margin-top: 4px"><i class="fa fa-plus" aria-hidden="true"></i>Thêm danh mục:</h4>
+            <h4 class="class="text-success" style="margin-top: 4px"><i class="fa fa-plus" aria-hidden="true"></i>Thêm danh mục:</h4>
           </div>
           <div class="col-sm-12">
               <div class="form-group">
@@ -46,7 +48,7 @@
       </form>
     </div>
   </div>
-<div class="panel panel-default">
+<div class="panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">Danh mục cha</h3>
     </div>

@@ -1,7 +1,7 @@
 @extends('templates.admin.master')
 @section('content')
 
-<div class="container">
+<div class="container panel">
     <a href="" class="btn">Tất cả</a>
     <a href="" class="btn">Đã trả lời</a>
     <a href="" class="btn">Chưa trả lời</a>
@@ -20,12 +20,11 @@
         	</thead>
             <tbody>
                           	
-                <tr class="unread checked">
+                <tr >
                 	<td>1</td>
                     <td>
                         <img src="{{$PublicUrl}}/img/member.jpg" alt="" class="img-responsive" width="50px">
                         <span>Mai Anh</span>
-                        <p>maianh@gmail.com</p>
                     </td>
                     <td>
                         <p class="rep-comment">Trả lời cho: bcd</p>
@@ -49,7 +48,7 @@
                     <td>
                         <span>bcd</span>
                         <p>
-                           <a href="javascript:void(0)" data-toggle="modal" data-target="#myModal"><span class="btn" ><i class="fa fa-mail-reply" aria-hidden="true" >Trả lời</i></span></a>
+                           <a href=""><span class="btn" ><i class="fa fa-mail-reply" aria-hidden="true" >Trả lời</i></span></a>
                             <a href="" onclick="return confirm('Bạn có thật sự muốn xóa không?')"><span class="btn text-danger"><i class="fa fa-times" aria-hidden="true">Xóa</i></span></a>
                         </p>
                     </td>

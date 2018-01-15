@@ -4,11 +4,9 @@
 		<h3>Trụ sở</h3>
 		<ul>
 			<li>
-				<p>-34/145 K82 Nguyễn Lương Bằng, Liên Chiểu, Đà Nằng</p>
-				<p>- VP Hồ Chí Minh: Lầu 6 Tòa nhà Thịnh Phát - 178/8 Đường D1, Phường 25, Quận Bình Thạnh, TP Hồ Chí Minh </p>
-				<p>- VP Hà Nội: Tầng 6, Tòa Nhà Viện Công Nghệ - 25 Vũ Ngọc Phan, Phường Láng Hạ, Quận </Thạnh,>Đống Đa, TP Hà Nội
-				<p>SĐT: 0978262380</p>
-				<p>Email: tramnhien4420@gmail.com</p>
+				<p>{!! $arAbouts['Liên hệ'] !!}</p>
+				<p>SĐT: {!! $arAbouts['Số điện thoại'] !!}</p>
+				<p>Email: {!! $arAbouts['email'] !!}</p>
 			</li>
 		</ul>
 		
@@ -16,9 +14,10 @@
 	<div class="col-sm-2">
 		<h3>Pages</h3>
 		<ul>
-			<li><a href="">Tất cả công việc</a></li>
-			<li><a href="">Công ty</a></li>
-			<li><a href="">Liên hệ</a></li>
+			<li><a href="{{ route('jobs.job') }}">Tất cả công việc</a></li>
+			<li><a href="{{ route('jobs.company') }}">Công ty</a></li>
+			<li><a href="{{ route('jobs.contact') }}">Liên hệ</a></li>
+			<li><a href="{{route('auth.login')}}">Nhân viên Đăng nhập</a></li>
 		</ul>
 		
 	</div>
@@ -34,11 +33,11 @@
 	<div class="col-sm-3 ">
 		<h3>Mạng xã hội</h3>
 		<ul class="nav navbar-nav">
-			<li><a href=""><i class="fa fa-facebook fa-2x"></i></a></li>
-			<li><a href=""><i class="fa fa-twitter fa-2x"></i></a></li>
-			<li><a href=""><i class="fa fa-youtube fa-2x"></i></a></li>
-			<li><a href=""><i class="fa fa-google-plus fa-2x"></i></a></li>
-			<li><a href=""><i class="fa fa-pinterest fa-2x"></i></a></li>
+			<li><a href="{{ $arAbouts['facebook'] }}"><i class="fa fa-facebook fa-2x"></i></a></li>
+			<li><a href="{{ $arAbouts['twitter'] }}"><i class="fa fa-twitter fa-2x"></i></a></li>
+			<li><a href="{{ $arAbouts['youtube'] }}"><i class="fa fa-youtube fa-2x"></i></a></li>
+			<li><a href="{{ $arAbouts['google'] }}"><i class="fa fa-google-plus fa-2x"></i></a></li>
+			<li><a href="{{ $arAbouts['pinterest'] }}"><i class="fa fa-pinterest fa-2x"></i></a></li>
 		</ul>
 	</div>
 	<div class="col-sm-12">

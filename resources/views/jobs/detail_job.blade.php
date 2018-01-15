@@ -4,13 +4,26 @@
 
 <div class="jumbotron" id="sumary">
 	<div class="container">
-		<div class="col-sm-2">
-			<img src="{{$PublicUrl}}/img/member.jpg" alt="" class="thumbnail img-responsive">
+		<div class="col-sm-2"> 
+			<?php $picture = ($oItem->picture != '')?$oItem->picture:'vodanh.jpeg'; ?>
+			<a href=""><img src="/storage/app/files/{{ $picture }}" alt="" class="thumbnail img-responsive"></a>
 		</div>
 		<div class="col-sm-8">
-			<h3>Phó Tổng Giám Đốc Kinh Doanh BĐS Chủ Đầu Tư</h3>
-			<p><a href="">Công Ty Cổ Phần Casablanca Việt Nam</a></p>
-			<p>456 Lượt xem - Hết hạn trong 3 ngày</p>
+			<h3>{{ $oItem->title }}</h3>
+			<p><a href="{{ route('jobs.detail_company', ['name'=>str_slug($oItem->fullname),'id'=>$oItem->user_id]) }}">{{ $oItem->fullname }}</a></p>
+			<?php 
+			$today = date('d-m-Y');
+			$dateOut = date('d-m-Y',strtotime($oItem->expired));
+			if($today < $dateOut){
+				$dem = 'Hết hạn vào ngày '.date('d-m-Y',strtotime($oItem->expired));
+			}elseif($today > $dateOut){
+				$dem = 'Đã hết hạn';
+			}else{
+				$dem = "Hết hạn trong hôm nay";
+			}
+
+			 ?>
+			<p>456 Lượt xem -  {{ $dem }}</p>
 			<p><span class="fa fa-heart"></span> 3 Lượt thích </p>
 		</div>
 		<div class="col-sm-2 button">
@@ -23,8 +36,7 @@
 	<div class="container">
 		<ul class="nav nav-tabs">
 		  <li class="active"><a data-toggle="tab" href="#home">THÔNG TIN</a></li>
-		  <li><a data-toggle="tab" href="#menu1">CÔNG TY</a></li>
-		  <li><a data-toggle="tab" href="#menu2">VIỆC LÀM KHÁC TỪ CÔNG TY</a></li>
+		  <li><a data-toggle="tab" href="#menu2">VIỆC LÀM KHÁC CÙNG CÔNG TY</a></li>
 		  <li><a data-toggle="tab" href="#menu3">BÌNH LUẬN & ĐÁNH GIÁ</a></li>
 		</ul>
 
@@ -32,76 +44,38 @@
 		  <div id="home" class="tab-pane fade in active">
 		    <div class="col-sm-8">
 		    	<h3>MÔ TẢ CÔNG VIỆC</h3>
-				<p>- Thực hiện các thủ tục liên quan đến thành lập, thay đổi, chia tách, sáp nhập doanh nghiệp, đầu tư tài chính, đầu tư xây dựng, sở hữu trí tuệ.<br/>
-				- Xây dựng và chủ trì soạn thảo các văn bản định chế phục vụ cho công tác quản lý, điều hành của Tập đoàn và các công ty thành viên.<br/>
-				- Trực tiếp rà soát, soạn thảo các hợp đồng kinh tế, các biên bản cuộc họp hoặc các văn bản liên quan đến pháp luật.<br/>
-				- Kiểm tra tính pháp lý các hợp đồng, văn bản quy chế hoạt động do các đơn vị trong Tập đoàn dự thảo và đề xuất.<br/>
-				- Hệ thống hóa, quản lý văn bản pháp lý phục vụ hoạt động sản xuất kinh doanh của Tập đoàn và các công ty thành viên.<br/>
-				- Thực hiện một số công việc khác theo sự chỉ đạo của Ban tổng giám đốc Tập đoàn.</p>
+				<p>{!! $oItem->preview !!}</p>
 		    
 			    <h3>YÊU CẦU CÔNG VIỆC</h3>
-				<p>- Nam, Nữ, ngoại hình khá, tốt nghiệp Đại học trở lên thuộc chuyên ngành Luật.</p>
-				<p>- Tuổi : từ 32 tuổi trở lên</p>
-				<p>- Ưu tiên những ứng cử viên đã có kinh nghiệm công tác trong lĩnh vực pháp luật về tài chính, </p>chứng khoán, lập và triển khai dự án đầu tư và phân phối về xây dựng, sở hữu trí tuệ và quản trị doanh nghiệp
-				<p>- Ưu tiên những ứng cử viên đã làm việc tại các Tập đoàn tư nhân quy mô lớn, đầu tư đa ngành </p>nghề
-				<p>- Ưu tiên có thẻ Luật sư</p>nghề>
-				<p>- Năng động, sáng tạo, có khả năng làm việc độc lập, chịu được áp lực công việc cao</p>
-				<p>- Sử dụng thành thạo phần mềm vi tính văn phòng của Microsoft.</p>
-				<p>- Ưu tiên biết Tiếng Anh.</p>
-
-				<h3>QUYỀN Lợi</h3>
-	    		<p>Tăng lương định kỳ dựa trên mức độ hoàn thành công việc.</p>
-				<p>Hưởng đầy đủ quyền lợi BHXH, BHYT, BHTN theo luật lao động VN.</p>
-				<p>Các chế độ phúc lợi khác như: Nghỉ lễ, tết, phép năm, tham quan du lịch hằng năm.</p>
+				<p>{!! $oItem->required !!}</p>
 			</div>
 			<div class="col-sm-4">
 				<br>
 				<ul class="list-group">
 				  <li class="list-group-item">
-				  	<h4><span class="glyphicon glyphicon-calendar"></span> Ngày đăng tuyển:</h4>
-				  	<p > 09/08/2017</p>
-				  </li>
-				  <li class="list-group-item">
 				  	<h4><span class="glyphicon glyphicon-user"></span> Cấp bậc:</h4>
-				  	<p >Nhân viên</p>
+				  	<p >{{ $oItem->job_level }}</p>
 				  </li>
 				  <li class="list-group-item">
 				  	<h4><span class="glyphicon glyphicon-folder-close"></span> Ngành nghề:</h4>
-				  	<p >Marketing</p>
+				  	<p >{{ $oItem->job_categories }}</p>
 				  </li>
-				  <li class="list-group-item">
-				  	<h4><span class="glyphicon glyphicon-fire"></span> Kỹ năng:</h4>
-				  	<p >Tiếng anh, Giao tiếp, Làm việc nhóm</p>
-				  </li>
-				  <li class="list-group-item">
-				  	<button  class="btn btn-block btn-danger btn-lg">Nộp đơn</button>
-				  </li>
-				</ul>
-			</div>	
-			<div class="clearfix"></div>
-		  </div>
-		  <div id="menu1" class="tab-pane fade">
-		    <div class="col-sm-8">
-				<p>Trải qua chặng đường 5 năm hình thành và không ngừng kiện toàn, Danko Group đã tích lũy nguồn lực về tài chính cũng như tầm nhìn và quản lý. </p><p>Đến tháng 4/2016, Danko Group trải qua quá trình chuyển mình mạnh mẽ khi chính thức gia nhập lĩnh vực đầu tư - kinh doanh dịch vụ bất động sản.</p><p> Chỉ sau một năm, với cách làm quyết liệt, sáng tạo và hiệu quả, Danko Group đã nhanh chóng mở rộng quy mô hoạt động, thu hút nhân tài, hoàn thiện bộ máy.</p><p>Giờ đây, nhắc đến Danko Group là nghĩ đến sự phát triển thần tốc, dịch vụ uy tín, đội ngũ CBNV nhiệt huyết, chuyên nghiệp và lộ trình phát triển rõ ràng đầy mạnh mẽ.</p>
-		    	<img src="{{$PublicUrl}}/img/member.jpg" alt="" class="thumbnail img-responsive">
-			</div>
-			<div class="col-sm-4">
-				<ul class="list-group">
 				  <li class="list-group-item">
 				  	<h4><span class="glyphicon glyphicon-map-marker"></span> Địa điểm:</h4>
-				  	<p> 123 Đống Đa Hà Nội</p>
-				  </li>
-				  <li class="list-group-item">
-				  	<h4><span class="glyphicon glyphicon-user"></span> Quy mô:</h4>
-				  	<p >Nhân viên</p>
+				  	<p> {{ $oItem->address }}</p>
 				  </li>
 				  <li class="list-group-item">
 				  	<h4><span class="glyphicon glyphicon-comment"></span> Liên hệ:</h4>
-				  	<p >SĐT:0989909992</p>
-				  	<p >Email:test@gmail.com</p>
+				  	<p >{{ $oItem->agency }}</p>
+				  	<p >SĐT: {{ $oItem->phone }}</p>
+				  	<p >Email: {{ $oItem->email }}</p>
+				  </li>
+				   <li class="list-group-item">
+				  	<h4><span class="glyphicon glyphicon-calendar"></span> Hạn nộp đơn:</h4>
+				  	<p > {{ $dateOut }}</p>
 				  </li>
 				  <li class="list-group-item">
-				  	<button  class="btn btn-block btn-success btn-lg">Tìm hiểu thêm</button>
+				  	<button  class="btn btn-block btn-danger btn-lg">Nộp đơn</button>
 				  </li>
 				</ul>
 			</div>	
@@ -119,8 +93,7 @@
 		    </div>
 		  </div>
 		  <div id="menu3" class="tab-pane fade">
-
-		  	<!--Bình luận-->
+			@include('jobs.comment')
 		  </div>
 		</div>	
 	</div>

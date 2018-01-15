@@ -10,69 +10,43 @@
   	@include('templates.jobs.leftbar')
   	<div class="col-sm-8 col-sx-8">
   		<div class="title">
-			<h3>1,000 việc làm cho It</h3>
+			<h3>{{ $sum or 'Rất nhiều' }} việc làm cho {{ $title or 'bạn' }}</h3>
 			<p class="text-danger">Còn chần chừ gì nữa, hãy ứng tuyển ngay nào!</p>
 		</div>
 
-		@for($i=1;$i<=5;$i++)
-
+		@foreach($arItems as $value)
+		<?php 
+			$urlJob = route('jobs.detail_job',['name'=>str_slug($value->title), 'id'=>$value->id_job]);
+			$urlCompany = route('jobs.detail_company',['name'=>str_slug($value->fullname), 'id'=>$value->user_id]);
+		 ?>
 		<div class="row">
 			<div class="col-sm-2">
-				<img src="{{$PublicUrl}}/img/member.jpg" alt="" class="thumbnail img-responsive">
+				 <?php $picture = ($value->picture != '')?$value->picture:'vodanh.jpeg'; ?>
+				<a href="{{ $urlJob }}"><img src="/storage/app/files/{{ $picture }}" alt="" class="thumbnail img-responsive"></a>
 			</div>
 			<div class="col-sm-9">
-				<h3><a href="/detail_job">Phó Tổng Giám Đốc Kinh Doanh BĐS Chủ Đầu Tư</a></h3>
-				<p><a href="">Công Ty Cổ Phần Casablanca Việt Nam</a></p>
-				<p><span class="glyphicon glyphicon-map-marker"></span>Đà Nẵng | <span class="glyphicon glyphicon-usd"></span>500-800 | <span class="glyphicon glyphicon-calendar"></span>3/6/2018</p>
-				<button  class="btn btn-default">Markerting</button>
+				<h3><a href="{{ $urlJob }}">{{ $value->title }}</a></h3>
+				<p><a href="{{ $urlCompany }}">Công ty {{ $value->fullname }}</a></p>
+				<p><span class="fa fa-money"></span>{{ number_format($value->salary,0,'.',',') }} | <span class="glyphicon glyphicon-calendar"></span>{{ date("d-m-Y", strtotime($value->expired)) }} | <span class="glyphicon glyphicon-map-marker"></span>Đà Nẵng</p>
+				<!-- <button  class="btn btn-default">Markerting</button>
 				<button  class="btn btn-default">Sales</button>
-				<button  class="btn btn-default">Tiếng Anh</button>
+				<button  class="btn btn-default">Tiếng Anh</button> -->
 
 			</div>
 			<div class="col-sm-1 ">
 				<br>
-				<button  class="btn btn-danger">Mới</button>
+				<button class="btn btn-danger">Mới</button>
 				<br>
 				<br>
 				<button  class="btn btn-default"><i class="fa fa-heart-o fa-2x" aria-hidden="true"></i></button>
-
-			</div>
-			<div class="clearfix"></div>
-			<br>
-		</div>
-		
-		<div class="row">
-
-			<div class="col-sm-2">
-				<img src="{{$PublicUrl}}/img/member.jpg" alt="" class="thumbnail img-responsive">
-			</div>
-			<div class="col-sm-9">
-				<h3><a href="/detail_job">Phó Tổng Giám Đốc Kinh Doanh BĐS Chủ Đầu Tư</a></h3>
-				<p><a href="">Công Ty Cổ Phần Casablanca Việt Nam</a></p>
-				<p><span class="glyphicon glyphicon-map-marker"></span>Đà Nẵng | <span class="glyphicon glyphicon-usd"></span>500-800 | <span class="glyphicon glyphicon-calendar"></span>3/6/2018</p>
-				<button  class="btn btn-default">Markerting</button>
-				<button  class="btn btn-default">Sales</button>
-				<button  class="btn btn-default">Tiếng Anh</button>
-
-			</div>
-			<div class="col-sm-1 ">
-				<br>
-				<button  class="btn btn-default"><i class="fa fa-heart fa-2x" aria-hidden="true"></i></button>
-
 			</div>
 			<div class="clearfix"></div>
 			<br>
 		</div>
 
-		@endfor
+		@endforeach
 
-		<ul class="pagination">
-		  <li><a href="#">1</a></li>
-		  <li><a href="#">2</a></li>
-		  <li><a href="#">3</a></li>
-		  <li><a href="#">4</a></li>
-		  <li><a href="#">5</a></li>
-		</ul>
+		{{ $arItems->links() }}
   	</div>
   	
 	<div class="col-sm-2 col-sx-2 text-center ">

@@ -14,7 +14,7 @@ class AdvController extends Controller
     public function index()
     {
     	$title = "Quản lý quảng cáo";
-    	$arItems = Adv::orderBy('slice','DESC')->where('active',1)->paginate(getenv('ADMIN_ROWS'));
+    	$arItems = Adv::orderBy('slice','DESC')->paginate(getenv('ADMIN_ROWS'));
     	return view('admin.adv.index', ['title'=>$title, 'arItems' => $arItems]);
     }
 
@@ -23,8 +23,10 @@ class AdvController extends Controller
         $title = "Quản lý quảng cáo";
         if($name < 3){
             $arItems = Adv::where('slice',$name)->orderBy('active','DESC')->paginate(getenv('ADMIN_ROWS'));
-        }else{
+        }elseif($name == 3){
             $arItems = Adv::where('active',0)->paginate(getenv('ADMIN_ROWS'));
+        }elseif($name == 4){
+            $arItems = Adv::where('active',1)->paginate(getenv('ADMIN_ROWS'));
         }
         
         return view('admin.adv.index', ['title'=>$title, 'arItems' => $arItems]);

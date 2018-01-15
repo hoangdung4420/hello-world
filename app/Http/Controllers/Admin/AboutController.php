@@ -14,20 +14,24 @@ class AboutController extends Controller
     	return view('admin.about.index', ['title'=>$title, 'arItems' =>$arItems]);
     }
 
-    public function postEdit(Request $request)
+    public function getEdit($id)
+    {
+        $title = "Quản lý thông tin website";
+        $oItem = About::findOrFail($id);
+        return view('admin.about.edit', ['title'=>$title, 'oItem' =>$oItem]);
+    }
+
+    public function postEdit($id,Request $request)
     {
     	$data = $request->all();
-    	$oItem = About::findOrFail($data['aid']);
-        $detail_old = $oItem->detail;
-    	$oItem->detail = $data['adetail'];
-    	$result = $oItem->update();
+    	$oItem = About::findOrFail($id);
+        $oItem->detail = $request->detail;
+       $result = $oItem->save();
         if($result){
-            echo '<script>alert("sửa thành công");</script>';
-            echo $data['adetail'];
+            $request->session()->flash('msgS','Sửa thành công');
         }else{
-            echo '<script>alert("có lỗi xảy ra");</script>';
-            echo $detail_old;
+            $request->session()->flash('msgW','Có lỗi khi sửa');
         }
-        
+        return redirect()->back();
     }
 }

@@ -1,8 +1,8 @@
 @extends('templates.admin.master')
 @section('content')
 @include('templates.admin.sumary')
-
-<div class="container">
+<br>
+<div class="container panel">
 	<h4 class="text-danger"><i class="fa fa-plus" aria-hidden="true"></i>Thống kê việc làm</h4>
 	<div class="panel panel-default">
 	  <div class="panel-body">
@@ -10,7 +10,8 @@
 	  </div>
 	 </div>
 </div>
-<div class="container">
+<div class="container panel">
+	<br>
 	<div class="col-sm-6" style="padding:0px">
 		<ul class="nav nav-tabs">
 		  <li class="active"><a data-toggle="tab" href="#home">Hôm nay</a></li>

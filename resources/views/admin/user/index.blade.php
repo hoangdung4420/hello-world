@@ -1,7 +1,10 @@
 @extends('templates.admin.master')
 @section('content')
-<div class="container">
-    <div class="col-sm-2">
+
+<div class="container panel">
+  <br>
+    <div class="rows">
+      <div class="col-sm-2">
         <a href="{{ route('admin.user.add') }}" class="h3 btn btn-success btn-lg" style="margin-top: 4px"><i class="fa fa-plus" aria-hidden="true"></i>Thêm</a>
     </div>
     <div class="col-sm-10">
@@ -11,10 +14,9 @@
             <div class="alert alert-warning">{{ Session::get('msgW') }}</div>
           @endif
     </div>
-        
-</div>
-<div class="container">
-    <br><br>
+   <div class="clearfix"></div>
+    </div>
+    <br>
 	<div class="table-responsive">
         <table class="table tab-border table-hover center">
         	<thead>
@@ -38,7 +40,7 @@
                        ?>
                         <img src="/storage/app/files/{{ $picture }}" alt="" class="imgComany" width="100px" >
                        <span>{{ $arItem->fullname }}
-                       <p>{{ $arItem->email }}</p></span>
+                      </span>
                        <div class="clearfix"></div>
                     </td>
                     <td>{{ $arItem->name }}</td>
@@ -49,7 +51,7 @@
                          <a href="{{route('admin.candidate.edit',$arItem->phone)}}" ><span class="btn" ><i class="fa fa-plus" aria-hidden="true" >Hồ sơ</i></span></a>
                          <br />
                          @elseif($arItem->level_id == 3 )
-                         <a href="/admin/cong-ty/them" ><span class="btn" ><i class="fa fa-plus" aria-hidden="true" >Hồ sơ</i></span></a>
+                         <a href="{{route('admin.company.edit',$arItem->phone)}}" ><span class="btn" ><i class="fa fa-plus" aria-hidden="true" >Hồ sơ</i></span></a>
                          <br />
                          @endif 
 

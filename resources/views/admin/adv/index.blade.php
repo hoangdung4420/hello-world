@@ -1,6 +1,7 @@
 @extends('templates.admin.master')
 @section('content')
-<div class="container">
+<div class="container panel">
+  <br>
     <div class="col-sm-2">
         <a href="{{ route('admin.adv.add') }}" class="h3 btn btn-success btn-lg" style="margin-top: 4px"><i class="fa fa-plus" aria-hidden="true"></i>Thêm</a>
     </div>
@@ -11,15 +12,15 @@
             <div class="alert alert-warning">{{ Session::get('msgW') }}</div>
           @endif
     </div>
-            
-</div>
-<div class="container">
-  <a href="{{route('admin.adv.index')}}" class="btn">Hoạt động</a>
+     <div class="clearfix"></div>       
+
+<div class="">
+  <a href="{{route('admin.adv.arrange',4)}}" class="btn">Hoạt động</a>
   <a href="{{route('admin.adv.arrange',3)}}" class="btn">Khóa</a>
   <a href="{{route('admin.adv.arrange',1)}}" class="btn">Slice</a>
   <a href="{{route('admin.adv.arrange',0)}}" class="btn">right-bar</a>
 </div>
-<div class="container">
+
 	<div class="table-responsive">
         <table class="table tab-border table-hover center">
         	<thead>
@@ -52,7 +53,6 @@
                 @endforeach
             </tbody>
         </table>
-
    </div> 
    <div class="pull-right">
        {{ $arItems->links() }}

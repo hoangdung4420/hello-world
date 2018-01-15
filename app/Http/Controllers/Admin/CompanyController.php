@@ -38,13 +38,16 @@ class CompanyController extends Controller
         $oItem->benifit = $request->benifit;
         $oItem->preview = $request->preview;
     	$oItem->detail = $request->detail;
-        if(Auth::user()->level_id){
+        if(Auth::user()->level_id == 1){
            $oItem->reader = $request->reader;
             if(isset($request->feature)){
                 $oItem->feature = 1;
             }else{
                 $oItem->feature = 0;
             }
+        }else{
+             $oItem->reader = $oItem->reader;
+             $oItem->feature = $oItem->feature;
         }
        $result = $oItem->save();
         if($result){

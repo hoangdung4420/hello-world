@@ -21,7 +21,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand " href="{{ route('admin.index.index') }}">YOUR-WORK</a>
+          <a class="navbar-brand " href="{{ route('admin.index.index') }}">YOUR-WORK </a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -31,9 +31,10 @@
             <li class ="{{ Request::is('*company*')?'active':''}}"><a href="{{route('admin.company.index')}}">Công ty</a></li>
             <li class ="{{ Request::is('*candidate*')?'active':''}}"><a href="{{ route('admin.candidate.index') }}">Ứng viên</a></li>
             <li class ="{{ Request::is('*user*')?'active':''}}"><a href="{{ route('admin.user.index') }}">Người dùng</a></li>
-            <li><a href="/admin/lien-he">Liên hệ</a></li>
-            <li><a href="/admin/binh-luan">Bình luận</a></li>
+            <li class ="{{ Request::is('*comment*')?'active':''}}"><a href="{{route('admin.comment.index')}}">Bình luận</a></li>
+            <li class ="{{ Request::is('*contact*')?'active':''}}"><a href="{{route('admin.contact.index')}}">Liên hệ</a></li>
             <li class="{{ Request::is('*adv*')?'active':''}}"><a href="{{route('admin.adv.index')}}">Quảng cáo</a></li>
+
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
@@ -46,7 +47,7 @@
                 <li><a href="#"><span  class="btn btn-warning btn-block">Hồ sơ</a></a></li>
                 <li><a href="#">Công việc<span class="badge pull-right">3</span></a></li>
                 <li><a href="#">Liên hệ<span class="badge pull-right">3</span></a></li>
-                <li><a href="#">Bình luận<span class="badge pull-right">3</span></a></li>
+                <li><a href="#">Bình luận<span class="badge pull-right">3</span></a>   </li>
               </ul>
             </li>
             <li><a href="{{ route('logout') }}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>

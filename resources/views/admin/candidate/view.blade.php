@@ -1,6 +1,7 @@
 @extends('templates.admin.master')
 @section('content')
-<div class="container">
+<div class="container panel">
+  <br>
   <div class="col-sm-12">
      <h3 class="text-center text text-success">Hồ sơ</h3>
   </div>
@@ -96,7 +97,6 @@
                <p>{{$time->detail}}</p>
                @endif
              @endforeach
-         </select>         
       </div>
     </div>
  <div class="clearfix"></div> 

@@ -1,6 +1,7 @@
 @extends('templates.admin.master')
 @section('content')
-<div class="container">
+<div class="container panel">
+  <br>
 <div class="row">
  @if(Session::get('msgS') != null)
  <div class="alert alert-success">{{ Session::get('msgS') }}</div>
@@ -8,8 +9,8 @@
     <div class="alert alert-warning">{{ Session::get('msgW') }}</div>
   @endif
 </div>   
-</div>
-<div class="container">
+
+<div class="">
 <form action="" id="formS">
   <div class="col-sm-3 col-xs-3">
     <input class="form-control"  type="text" placeholder ="Tên công ty">
@@ -25,7 +26,7 @@
   </div>
 </form>
 </div>
-<div class="container">
+
 <br><br>
 <div class="table-responsive">
 <table class="table tab-border table-hover center">
@@ -50,7 +51,6 @@
             <?php $picture = ($arItem->picture != '')?$arItem->picture:'vodanh.jpeg'; ?>
             <img src="/storage/app/files/{{ $picture }}" alt="" class="imgComany" width="50px" >
             <span>{{ $arItem->fullname }}</span>
-            <p>{{ $arItem->email }}</p> 
              @if(Auth::user()->level_id == 1)
               <a href="{{route('admin.user.edit',$arItem->id)}}" class="btn">Xem tài khoản</a>
               @endif

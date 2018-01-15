@@ -1,9 +1,19 @@
 <?php
+ 
 Route::pattern('id','([0-9]*)');
+Route::pattern('status','([0-9]*)');
 Route::pattern('number','([0-9]*)');
 Route::pattern('name','(.*)');
+$name ="admin";
+session_start();
+if(isset($_SESSION['level']) ){
+	if($_SESSION['level'] == 3){
+		$name = "congty";
+	}elseif($_SESSION['level'] == 4){
+		$name = "ungvien";
+	}
+}
 
-$name="admin";
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,10 +26,19 @@ $name="admin";
 */
 
 Route::group(['namespace'=>'Auth'], function(){
-	Route::get('login', [
-		'uses' => 'AuthController@getLogin',
-		'as' => 'auth.login'
+	Route::get('candidate-login', [ 
+		'uses' => 'AuthController@candidateLogin',
+		'as' => 'auth.candidatelogin'
 	]);
+	Route::get('company-login', [ 
+			'uses' => 'AuthController@companyLogin',
+			'as' => 'auth.companylogin'
+		]);
+
+	Route::get('login', [
+			'uses' => 'AuthController@getLogin',
+			'as' => 'auth.login'
+		]);
 
 	Route::post('login', [
 		'uses' => 'AuthController@postLogin',
@@ -31,10 +50,6 @@ Route::group(['namespace'=>'Auth'], function(){
 			'as' => 'logout'
 		]);
 
-	Route::get('register', [
-		'uses' => 'AuthController@getRegister',
-		'as' => 'auth.register'
-	]);
 	Route::post('register', [
 		'uses' => 'AuthController@postRegister',
 		'as' => 'auth.register'
@@ -55,25 +70,51 @@ Route::group(['namespace'=>'Job'], function (){
 		'as' => 'jobs.index'
 	]);
 
-	Route::get('search', function () {
-	    return view('jobs.search');
-	});
+	Route::get('job', [
+		'uses' => 'PagesController@getJob',
+		'as' => 'jobs.job'
+	]);
 
-	Route::get('contact', function () {
-	    return view('jobs.contact');
-	});
+	Route::get('{name}-{id}-nn', [
+		'uses' => 'PagesController@getJobCat',
+		'as' => 'jobs.jobcat'
+	]);
 
-	Route::get('company', function () {
-	    return view('jobs.company');
-	});
+	Route::get('contact', [
+		'uses' => 'PagesController@getContact',
+		'as' => 'jobs.contact'
+	]);
 
-	Route::get('detail_job', function () {
-	    return view('jobs.detail_job');
-	});
+	Route::post('contact', [
+		'uses' => 'PagesController@postContact',
+		'as' => 'jobs.contact'
+	]);
 
-	Route::get('detail_company', function () {
-	    return view('jobs.detail_company');
-	});
+	Route::get('company', [
+		'uses' => 'PagesController@getCompany',
+		'as' => 'jobs.company'
+	]);
+
+	Route::get('{name}-{id}-cv', [
+		'uses' => 'PagesController@getDetailJob',
+		'as' => 'jobs.detail_job'
+	]);
+
+	Route::get('{name}-{id}-ct', [
+		'uses' => 'PagesController@getDetailCompany',
+		'as' => 'jobs.detail_company'
+	]);
+
+	Route::post('gui-cmt', [
+		'uses' => 'PagesController@sendCmt',
+		'as' => 'jobs.sendcmt'
+	]);
+
+	Route::post('rep-cmt', [
+		'uses' => 'PagesController@repCmt',
+		'as' => 'jobs.repcmt'
+	]);
+
 });
 Route::group(['prefix'=>'williamsheakpear', 'namespace' => 'Admin', 'middleware' => 'auth'], function (){
 	Route::get('img', [
@@ -93,7 +134,11 @@ Route::group(['prefix'=>$name, 'namespace' => 'Admin', 'middleware' => 'auth'], 
 			'uses' => 'AboutController@index',
 			'as' => 'admin.about.index'
 			]);
-		Route::post('edit', [
+		Route::get('edit/{id}', [
+			'uses' => 'AboutController@getEdit',
+			'as' => 'admin.about.edit'
+			]);
+		Route::post('edit/{id}', [
 			'uses' => 'AboutController@postEdit',
 			'as' => 'admin.about.edit'
 			]);
@@ -141,22 +186,31 @@ Route::group(['prefix'=>$name, 'namespace' => 'Admin', 'middleware' => 'auth'], 
 		]);
 
 		Route::get('edit/{id}', [
-			'uses' => 'JobController@getAdd',
+			'uses' => 'JobController@getEdit',
 			'as' => 'admin.job.edit'
 		]);
 
 		Route::post('edit/{id}', [
-			'uses' => 'JobController@postAdd',
+			'uses' => 'JobController@postEdit',
 			'as' => 'admin.job.edit'
 		]);
 
-		Route::get('cv',function () {
-		    return view('admin.job.cv');
-		});
+		Route::get('del/{id}', [
+			'uses' => 'JobController@del',
+			'as' => 'admin.job.del'
+		]);
 
-	
+		Route::get('cv/{id}', [
+			'uses' => 'ListJobController@getCV',
+			'as' => 'admin.job.cv'
+		]);
+
+		Route::get('selectCV/{id}/{status}', [
+			'uses' => 'ListJobController@selectCV',
+			'as' => 'admin.job.selectcv'
+		]);
 	});
-
+	
 	Route::group(['prefix'=>'company'], function (){
 		Route::get('/', [
 			'uses' => 'CompanyController@index',
@@ -216,17 +270,6 @@ Route::group(['prefix'=>$name, 'namespace' => 'Admin', 'middleware' => 'auth'], 
 			'uses' => 'CandidateController@postEdit',
 			'as' => 'admin.candidate.edit'
 		]);
-
-	/*	Route::post('add_cat', [
-			'uses' => 'CandidateController@addCat',
-			'as' => 'admin.candidate.addcat'
-		]);
-
-		Route::post('del_cat', [
-			'uses' => 'CandidateController@delCat',
-			'as' => 'admin.candidate.delcat'
-		]);
-	*/
 	});
 
 	Route::group(['prefix'=>'user'], function (){
@@ -261,20 +304,19 @@ Route::group(['prefix'=>$name, 'namespace' => 'Admin', 'middleware' => 'auth'], 
 	
 	});
 
-	Route::group(['prefix'=>'lien-he'], function (){
-		Route::get('/',function () {
-		    return view('admin.contact.index');
-		});
-
+	Route::group(['prefix'=>'contact'], function (){
+		Route::get('/', [
+			'uses' => 'ContactController@index',
+			'as' => 'admin.contact.index'
+		]);
 	
 	});
 
-	Route::group(['prefix'=>'binh-luan'], function (){
-		Route::get('/',function () {
-		    return view('admin.comment.index');
-		});
-
-	
+	Route::group(['prefix'=>'comment'], function (){
+		Route::get('/', [
+			'uses' => 'CommentController@index',
+			'as' => 'admin.comment.index'
+		]);
 	});
 
 	Route::group(['prefix'=>'adv'], function (){

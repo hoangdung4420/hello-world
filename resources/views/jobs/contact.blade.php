@@ -4,10 +4,26 @@
 
 <div class="container">
 	<div class="col-sm-8">
-		<div class="col-sm-10">
+		<div class="col-sm-12">
 			<h2 class="text-success">Gửi liên hệ </h2>
+			@if(Session::get('msgS') != null)
+             	<div class="alert alert-success">{{ Session::get('msgS') }}</div>
+	         @elseif(Session::get('msgW') != null)
+	            <div class="alert alert-warning">{{ Session::get('msgW') }}</div>
+	          @endif
 		</div>
-		<form action="" id="formSearch">
+		<div class="clearfix"></div>
+		<form action="{{ route('jobs.contact') }}" id="formSearch" method="POST">
+			{{ csrf_field() }}
+		      @if ($errors->any())
+		        <div class="alert alert-danger">
+		            <ul>
+		                @foreach ($errors->all() as $error)
+		                    <li>{{ $error }}</li>
+		                @endforeach
+		            </ul>
+		        </div>
+		        @endif
 		    <div class="col-sm-4 col-xs-4">
 		      <input class="form-control" id="focusedInput" type="text" name="fullname" placeholder ="Họ tên">
 		    </div>
@@ -32,22 +48,22 @@
 	<div class="col-sm-4">
 		<div class="col-sm-10">
 			<h2 class="text-success">Về chúng tôi</h2>
+
 		</div>
 		<div class="col-sm-12">
 			<ul class="list-group">
 			  <li class="list-group-item">
-			  	<h4><span class="glyphicon glyphicon-map-marker"></span>Địa điểm:</h4>
-			  	<p> 123 Đống Đa Hà Nội</p>
+			  	<h4><span class="glyphicon glyphicon-map-marker"></span>Địa chỉ:</h4>
+			  	<p>{!! $arAbouts['Liên hệ'] !!}</p>
 			  </li>
 			  <li class="list-group-item">
 			  	<h4><span class="glyphicon glyphicon-comment"></span> Liên hệ:</h4>
-			  	<p >SĐT:0989909992</p>
-			  	<p >Email:test@gmail.com</p>
+			  	<p >SĐT:{!! $arAbouts['Số điện thoại'] !!}</p>
+			  	<p >Email:{!! $arAbouts['email'] !!}</p>
 			  </li>
 			  <li class="list-group-item">
 			  	<h4><span class="glyphicon glyphicon-time"></span> Giờ mở cửa:</h4>
-			  	<p>8:00 Sáng đến 17:00 chiều</p>
-			  	<p>Từ thứ 2 đến thứ 7</p>
+			  	<p>{!! $arAbouts['Giờ mở cửa'] !!}</p>
 			  </li>
 			</ul>
 		</div>

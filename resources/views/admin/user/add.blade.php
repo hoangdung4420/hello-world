@@ -1,6 +1,7 @@
 @extends('templates.admin.master')
 @section('content')
-  <div class="container">
+  <div class="container panel">
+    <br>
     <div class="col-sm-12">
        <h3 class="text-center text text-success">Thêm người dùng </h3>
     </div>
@@ -73,7 +74,6 @@
           <input type="text" class="form-control"  placeholder="thành phố Đà Nẵng, quận Liên Chiểu, số 123 đường Ngô Văn Sở" name="address" >
         </div>
       </div>
-  
 
     <div class="form-group">
         <label class="control-label col-sm-2" >Ảnh đại diện:</label>

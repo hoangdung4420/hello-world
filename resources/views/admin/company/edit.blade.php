@@ -4,7 +4,8 @@
     <script src="/public/ckeditor/ckeditor.js" type="text/javascript"></script>   
     <script src="/public/ckfinder/ckfinder.js" type="text/javascript"></script>
 @stop
-<div class="container">
+<div class="container panel">
+  <br>
   <div class="col-sm-12">
      <h3 class="text-center text text-success">Chi tiết công ty</h3>
   </div>

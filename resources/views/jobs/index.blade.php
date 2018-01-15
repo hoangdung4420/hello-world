@@ -16,130 +16,64 @@
 		  <div class="panel-footer list-cate">
 		  	<div class="col-sm-4">
 		  		<ul>
+		  			<?php 
+		  				$break = round(count($CategoryParents) /3);
+		  				$i=0;
+		  			 ?>
+		  			@foreach($CategoryParents as $CategoryParent)
+		  			<?php $i++ ?>
 		  			<li>
-		  				<h4>Dịch vụ</h4>
+		  				<h4>{{ $CategoryParent->name }}</h4>
 		  				<ul>
-							<li><a href="">Phi chính phủ/Phi lợi nhuận (49)</a></li>
-							<li><a href="">Giáo dục/Đào tạo (395)</a></li>
-							<li><a href="">Y tế/Chăm sóc sức khỏe (210)</a></li>
-							<li><a href="">Tư vấn (250)</a></li>
+		  				@foreach($CategoryChilds as $CategoryChild)	
+		  					@if($CategoryChild->parent_id == $CategoryParent->id_jobcat)
+		  					<?php 
+		  					$name_slug = str_slug($CategoryChild->name);
+		  					$url = route('jobs.jobcat',['name'=>$name_slug, 'id'=>$CategoryChild->id_jobcat]);
+		  					 ?>
+							<li><a href="{{$url}}">{{ $CategoryChild->name }}</a></li>
+							@endif
+						@endforeach
 						</ul>
 		  			</li>
-		  			<li>
-		  				<h4>Dịch vụ</h4>
-		  				<ul>
-							<li><a href="">Phi chính phủ/Phi lợi nhuận (49)</a></li>
-							<li><a href="">Giáo dục/Đào tạo (395)</a></li>
-							<li><a href="">Y tế/Chăm sóc sức khỏe (210)</a></li>
-							<li><a href="">Tư vấn (250)</a></li>
-							<li><a href="">Giáo dục/Đào tạo (395)</a></li>
-							<li><a href="">Y tế/Chăm sóc sức khỏe (210)</a></li>
-							<li><a href="">Tư vấn (250)</a></li>
-						</ul>
-		  			</li>
-		  			<li>
-		  				<h4>Dịch vụ</h4>
-		  				<ul>
-							<li><a href="">Phi chính phủ/Phi lợi nhuận (49)</a></li>
-							<li><a href="">Giáo dục/Đào tạo (395)</a></li>
-							<li><a href="">Y tế/Chăm sóc sức khỏe (210)</a></li>
-							<li><a href="">Tư vấn (250)</a></li>
-						</ul>
-		  			</li>
-		  		</ul>
-		  	</div>
-			<div class="col-sm-4">
-		  		<ul>
-		  			<li>
-		  				<h4>Dịch vụ</h4>
-		  				<ul>
-							<li><a href="">Phi chính phủ/Phi lợi nhuận (49)</a></li>
-							<li><a href="">Giáo dục/Đào tạo (395)</a></li>
-							<li><a href="">Y tế/Chăm sóc sức khỏe (210)</a></li>
-							<li><a href="">Tư vấn (250)</a></li>
-						</ul>
-		  			</li>
-		  			<li>
-		  				<h4>Dịch vụ</h4>
-		  				<ul>
-							<li><a href="">Phi chính phủ/Phi lợi nhuận (49)</a></li>
-							<li><a href="">Giáo dục/Đào tạo (395)</a></li>
-							<li><a href="">Y tế/Chăm sóc sức khỏe (210)</a></li>
-							<li><a href="">Tư vấn (250)</a></li>
-							<li><a href="">Giáo dục/Đào tạo (395)</a></li>
-							<li><a href="">Y tế/Chăm sóc sức khỏe (210)</a></li>
-							<li><a href="">Tư vấn (250)</a></li>
-						</ul>
-		  			</li>
-		  			<li>
-		  				<h4>Dịch vụ</h4>
-		  				<ul>
-							<li><a href="">Phi chính phủ/Phi lợi nhuận (49)</a></li>
-							<li><a href="">Giáo dục/Đào tạo (395)</a></li>
-							<li><a href="">Y tế/Chăm sóc sức khỏe (210)</a></li>
-							<li><a href="">Tư vấn (250)</a></li>
-						</ul>
-		  			</li>
-		  		</ul>
-		  	</div>
-		  	<div class="col-sm-4">
-		  		<ul>
-		  			<li>
-		  				<h4>Dịch vụ</h4>
-		  				<ul>
-							<li><a href="">Phi chính phủ/Phi lợi nhuận (49)</a></li>
-							<li><a href="">Giáo dục/Đào tạo (395)</a></li>
-							<li><a href="">Y tế/Chăm sóc sức khỏe (210)</a></li>
-							<li><a href="">Tư vấn (250)</a></li>
-						</ul>
-		  			</li>
-		  			<li>
-		  				<h4>Dịch vụ</h4>
-		  				<ul>
-							<li><a href="">Phi chính phủ/Phi lợi nhuận (49)</a></li>
-							<li><a href="">Giáo dục/Đào tạo (395)</a></li>
-							<li><a href="">Y tế/Chăm sóc sức khỏe (210)</a></li>
-							<li><a href="">Tư vấn (250)</a></li>
-							<li><a href="">Giáo dục/Đào tạo (395)</a></li>
-							<li><a href="">Y tế/Chăm sóc sức khỏe (210)</a></li>
-							<li><a href="">Tư vấn (250)</a></li>
-						</ul>
-		  			</li>
-		  			<li>
-		  				<h4>Dịch vụ</h4>
-		  				<ul>
-							<li><a href="">Phi chính phủ/Phi lợi nhuận (49)</a></li>
-							<li><a href="">Giáo dục/Đào tạo (395)</a></li>
-							<li><a href="">Y tế/Chăm sóc sức khỏe (210)</a></li>
-							<li><a href="">Tư vấn (250)</a></li>
-						</ul>
-		  			</li>
+		  		@if($i == $break || $i == $break*2)
+					</ul>
+			  	</div>
+				<div class="col-sm-4">
+			  		<ul>
+		  		@endif
+		  			@endforeach
 		  		</ul>
 		  	</div>
 		  	<div class="clearfix"></div>
 		  </div>
 		</div>
-
-
 		<div class="panel panel-default">
 		  <div class="panel-body">
 		  		<h4>Gợi ý việc làm</h4>
 		  	</div>
 		  <div class="panel-footer ">
-		  	@for($i=1;$i<=12;$i++)
+		  	@foreach($arJobs as $arJob)
 		    <div class="col-sm-6">
 				<div class="panel panel-default">
 					<div class="col-sm-3">
-						<img src="{{$PublicUrl}}/img/member.jpg" alt="" class="thumbnail img-responsive">
+						<?php 
+                      $picture = ($arJob->picture != '')?$arJob->picture:'vodanh.jpeg';
+                       ?>
+						<img src="/storage/app/files/{{ $arJob->picture }}" alt="" class="thumbnail img-responsive">
 					</div>
 					<div class="col-sm-9">
-						<h4><a href="detail_jop.html">Phó Tổng Giám Đốc Kinh Doanh BĐS Chủ Đầu Tư</a></h4>
-						<span><a href="">Công Ty Cổ Phần Casablanca Việt Nam</a></span>
+						<?php 
+		  					$name_slug = str_slug($arJob->title);
+		  					$url = route('jobs.detail_job',['name'=>$name_slug, 'id'=>$arJob->id_job]);
+	  					 ?>
+						<h4><a href="{{ $url }}">{{ $arJob->title }}</a></h4>
+						<span>{{ $arJob->fullname }}</span>
 					</div>
 					<div class="clearfix"></div>
 				</div>
 			</div>
-			@endfor
+			@endforeach
 
 			<div class="clearfix"></div>
 			<br>
@@ -154,12 +88,16 @@
 		  		<h4><a href="">Công ty tuyển dụng hàng đầu</a>  <span>Xem thêm>></span></h4>
 		  	</div>
 		  <div class="panel-footer ">
-		  	@for($i=1;$i<=14;$i++)
+		  	@foreach($arCompanies as $arCompany)
 		    <div class="col-sm-6">
-				<a href=""><img src="{{$PublicUrl}}/img/member.jpg" alt="" class="thumbnail img-responsive"></a>
+				<?php 
+		            $picture = ($arJob->picture != '')?$arJob->picture:'vodanh.jpeg';
+		            $name_slug = str_slug($arCompany->fullname);
+					$url = route('jobs.detail_company',['name'=>$name_slug, 'id'=>$arCompany->id]);
+               ?>
+				<a href="{{ $url }}"><img src="/storage/app/files/{{ $arCompany->picture }}" alt="" class="thumbnail img-responsive"></a>
 			</div>
-			@endfor
-			
+			@endforeach
 			<div class="clearfix"></div>
 		  </div>
 		</div>	

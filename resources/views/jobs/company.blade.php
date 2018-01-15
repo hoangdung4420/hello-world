@@ -12,25 +12,25 @@
 			<h3>DANH SÁCH CÔNG TY</h3>
 		</div>
 		
-		@for($i=1;$i<=8;$i++)
-		<div class="col-sm-3 company">
-			<img src="{{$PublicUrl}}/img/member.jpg" alt="" class="thumbnail img-responsive">
-			<h3><a href="/detail_company">FPT-TELECOM</a></h3>
+		@foreach($arItems as $value)
+		<?php 
+			$urlCompany = route('jobs.detail_company',['name'=>str_slug($value->fullname), 'id'=>$value->user_id]);
+		 ?>
+	 	<div class="col-sm-3 company">
+			 <?php $picture = ($value->picture != '')?$value->picture:'vodanh.jpeg'; ?>
+			<a href="{{$urlCompany}}"><img src="/storage/app/files/{{ $picture }}" alt="" class="thumbnail img-responsive"></a>
+			<h3><a href="{{$urlCompany}}">Công ty {{ $value->fullname }}</a></h3>
 			<p><span class="glyphicon glyphicon-map-marker"></span>Đà Nẵng | <span class="glyphicon glyphicon-folder-close"></span> IT-Phần mềm</p>
 			<button  class="btn btn-default"><span class="glyphicon glyphicon-eye-open"></span>Xem thêm</button>
 			<button  class="btn btn-default"><span class="fa fa-heart-o"></span> Khen ngợi</button>
 			<div class="clearfix"></div>
 			<br>
 		</div>
-		@endfor
+		@endforeach
 		<div class="clearfix"></div>
-		<ul class="pagination pull-right">
-		  <li><a href="#">1</a></li>
-		  <li><a href="#">2</a></li>
-		  <li><a href="#">3</a></li>
-		  <li><a href="#">4</a></li>
-		  <li><a href="#">5</a></li>
-		</ul>
+		<div class="pull-right">
+		  {{ $arItems->links() }}
+		</div>
 		<div class="clearfix"></div>
   		</div>
 

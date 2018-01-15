@@ -1,6 +1,7 @@
 @extends('templates.admin.master')
 @section('content')
-<div class="container">
+<div class="container panel">
+  <br>
 <div class="col-sm-2">
   <a href="{{ route('admin.job.add') }}" class="btn btn-success btn-lg h3" style="margin-top: 4px"><i class="fa fa-plus" aria-hidden="true"></i>Thêm</a>
 </div>
@@ -12,9 +13,8 @@
 @endif
 </div>
    <div class="clearfix"></div>
-</div>
 <br>
-<div class="container">
+<div class="">
 <form action="" id="formS">
   <div class="col-sm-3 col-xs-3">
     <input class="form-control"  type="text" placeholder ="Tên công việc">
@@ -29,9 +29,9 @@
     <input class="form-control btn btn-danger" type="submit" value="Tìm kiếm">
   </div>
 </form>
+<br>
 </div>
-<div class="container">
-<br><br>
+<br>
 <div class="table-responsive">
   <table class="table tab-border table-hover center">
       <thead>
@@ -62,17 +62,15 @@
           <td>{{ $arItem->expired }}</td>
           <td>{{ $arItem->address }}</td>
           <td>
-              <a href="/admin/cong-viec/cv" class="btn btn-success btn-block count-job">50 CV</a>
+              <a href="{{ route('admin.job.cv', $arItem->id_job) }}" class="btn btn-success btn-block count-job">50 CV</a>
           </td>
           <td><a href="">chưa làm</a></td>
           <td><a href="">chưa làm</a></td>
           <td>{{ $arItem->reader }}</td>
           <td>
-              <a href="" ><span class="btn" ><i class="fa fa-mail-reply" aria-hidden="true" >Sửa</i></span></a>
+              <a href="{{ route('admin.job.edit', $arItem->id_job) }}" ><span class="btn" ><i class="fa fa-mail-reply" aria-hidden="true" >Sửa</i></span></a>
                <br />
-              <a href="" ><span class="btn text-success"><i class="fa fa-eye-slash" aria-hidden="true">khóa</i></span></a>
-              <br />
-              <a href="" onclick="return confirm('Bạn có thật sự muốn xóa không?')"><span class="btn text-danger"><i class="fa fa-times" aria-hidden="true">Xóa</i></span></a>
+              <a href="{{ route('admin.job.del', $arItem->id_job) }}" onclick="return confirm('Bạn có thật sự muốn xóa không?')"><span class="btn text-danger"><i class="fa fa-times" aria-hidden="true">Xóa</i></span></a>
           </td>
         </tr>
           @endforeach
@@ -82,6 +80,7 @@
 <div class="pull-right">
  {{ $arItems->links() }}
 </div>
+<br>
 </div>
 
 @stop

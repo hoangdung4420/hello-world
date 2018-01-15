@@ -35,6 +35,15 @@ class UserController extends Controller
                 }
             }
         }
+        //luu tạm id_company vào phone
+        $companies = Company::all();
+        foreach ($arItems as $arItem) {
+            foreach ($companies as $company) {
+                if($arItem->id == $company->user_id){
+                    $arItem->phone = $company->id_company;
+                }
+            }
+        }
     	return view('admin.user.index', ['title' => $title, 'arItems' => $arItems ]);
     }
 
