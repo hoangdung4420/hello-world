@@ -12,9 +12,14 @@ use App\Position;
 use App\Category;
 use App\Contact;
 use App\Comment;
-
+use App\Like;
+use Auth;
 class PagesController extends Controller
 {
+    public  function __construct(Like $mLike)
+    {
+        $this->mLike = $mLike;
+    }
     public function index()
     {
     	$title = "Trang chủ";
@@ -94,15 +99,27 @@ class PagesController extends Controller
 		$job_categories = Category::all();
 		foreach ($job_categories as $val) {
 			if($oItem[0]->job_categories == $val->id_jobcat){
-				$oItem[0]->job_categories = $val->name;
+				$oItem[0]->job_categories_name = $val->name;
 			}
 		}
+        $oItem[0]->like = $this->mLike->countJobLikes($id);
+        $oItem[0]->dislike = $this->mLike->countJobDislikes($id);
 		//lấy việc làm khác cùng công ty
+        $arJobInCompany = Job::orderBy('id_job','DESC')->where('user_id',$oItem[0]->user_id)->where('id_job','!=',$id)->get();
 		//lấy bình luận cho công việc này
          $arCmtParent = Comment::where('parent_id',0)->where('job_id',$id)->orderBy('id_comment','DESC')->get();
         $arCmtChild = Comment::where('parent_id','!=',0)->where('job_id',$id)->get();
 		//lấy công việc tương tự
-    	return view ('jobs.detail_job',['title'=>$title, 'oItem'=>$oItem[0], 'arCmtParent'=>$arCmtParent,'arCmtChild'=>$arCmtChild]);
+        $arJobSame = Job::join('users','user_id','id')->select('jobs.*','picture','fullname')->where('id_job','!=',$id)->where('job_categories',$oItem[0]->job_categories)->inRandomOrder()->limit(6)->get();
+        //nếu ko đủ 6 thì thêm công việc đk tương tự thấp hơn
+        //dd($arJobSame);
+        //kiểm tra người đang đăng nhập có thích công việc này chưa
+        $checkLike = 0;
+        if(Auth::check()){
+            $checkLike = Like::where('oitem_id',$id)->where('oitem',2)->where('user_id',Auth::user()->id)->where('status',1)->count();
+            $checkDisLike = Like::where('oitem_id',$id)->where('oitem',2)->where('user_id',Auth::user()->id)->where('status',0)->count();
+        }
+    	return view ('jobs.detail_job',['title'=>$title, 'oItem'=>$oItem[0], 'arCmtParent'=>$arCmtParent,'arCmtChild'=>$arCmtChild,'arJobInCompany'=>$arJobInCompany,'arJobSame'=>$arJobSame, 'checkLike'=>$checkLike, 'checkDisLike'=>$checkDisLike]);
     }
 
     public function getDetailCompany($name, $id)
@@ -118,6 +135,8 @@ class PagesController extends Controller
     			}
     		} 
     	}
+        $oItem[0]->like = $this->mLike->countCompanyLikes($id);
+        $oItem[0]->dislike = $this->mLike->countCompanyDislikes($id);
     	return view ('jobs.detail_company',['title'=>$title, 'oItem'=>$oItem[0], 'listJob'=>$listJob]);
     }
 

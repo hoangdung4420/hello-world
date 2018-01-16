@@ -7,12 +7,24 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\JobAddRequest;
 use App\Job;
 use App\Category;
+use App\Like;
 use Auth;
 class JobController extends Controller
 {
+    public  function __construct(Like $mLike)
+    {
+        $this->mLike = $mLike;
+    }
     public function index()
     {
     	$title = "quản lý công việc";
+        if(Auth::user()->level_id == 3){
+            echo 'chỉ hiển thị những công việc mà công ty đăng lên';
+            die();
+        }elseif(Auth::user()->level_id == 4){
+            echo 'chỉ hiển thị những công việc theo danh sách đã nộp đơn, và đã like hoặc dislike, ko xem đk số hồ sơ đăng kí cũng như tổng số like, dislike,lượt đọc, nhưng nhảy ra xem ở public đk';
+            die();
+        }
     	$arItems = Job::join('users','user_id','id')->select('jobs.*','fullname')->where('jobs.active',1)->paginate(getenv('ADMIN_ROWS'));
     	$today = date('Y-m-d');
     	foreach ($arItems as $value) {
@@ -21,6 +33,8 @@ class JobController extends Controller
     		if($today > $value->expired){
     			$value->expired = date("d-m-Y", strtotime($value->expired)). '(hết hạn)';
     		}
+             $value->like = $this->mLike->countJobLikes($value->id_job);
+            $value->dislike = $this->mLike->countJobDislikes($value->id_job);
     	}
     	//dd($arItems);
     	return view('admin.job.index', ['title'=>$title, 'arItems'=>$arItems]);

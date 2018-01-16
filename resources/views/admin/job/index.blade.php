@@ -64,8 +64,8 @@
           <td>
               <a href="{{ route('admin.job.cv', $arItem->id_job) }}" class="btn btn-success btn-block count-job">50 CV</a>
           </td>
-          <td><a href="">chưa làm</a></td>
-          <td><a href="">chưa làm</a></td>
+          <td><a href="">{{ $arItem->like }}</a></td>
+          <td><a href="">{{ $arItem->dislike }}</a></td>
           <td>{{ $arItem->reader }}</td>
           <td>
               <a href="{{ route('admin.job.edit', $arItem->id_job) }}" ><span class="btn" ><i class="fa fa-mail-reply" aria-hidden="true" >Sửa</i></span></a>

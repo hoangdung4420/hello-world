@@ -127,3 +127,24 @@ div.button{
 .list-cate ul li{
 	line-height: 25px;
 }			
+#level_user{
+	color:#fff !important;
+	border: 2px solid #000;
+	border-radius: 0px;
+	text-transform: uppercase;
+}
+#level_user:hover{
+	color:#000 !important;
+}
+#company_title{
+	height: 55px;
+}
+#img_company{
+	height: 200px;
+}
+#company_title_mini{
+	height: 30px;
+}
+#img_company_mini{
+	height: 130px;
+}

@@ -10,11 +10,10 @@
 		<div class="col-sm-8">
 			<h3>{{ $oItem->fullname }}</h3>
 			<p>456 Lượt xem </p>
-			<p><span class="fa fa-heart"></span> 3 Lượt thích </p>
-		</div>
-		<div class="col-sm-2 button">
-			<a  href="" class="btn btn-default btn-block btn-lg"><span class="fa fa-heart"></span>Thích</a>
-			<a  href="" class="btn btn-default btn-block btn-lg"><span class="fa fa-heart"></span>Không thích</a>
+			<p>
+				<span>{{ $oItem->like }}</span> <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+				<span>{{ $oItem->dislike }}</span><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+			 </p>
 		</div>
 	</div>
 </div>

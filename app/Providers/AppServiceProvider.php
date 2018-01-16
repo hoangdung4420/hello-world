@@ -13,6 +13,7 @@ use App\Time;
 use App\User;
 use App\Job;
 use App\About;
+use Auth;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -40,7 +41,11 @@ class AppServiceProvider extends ServiceProvider
             $artt[$ar->title] = $ar->detail;
           }
         View::share('arAbouts', $artt);
-
+        if(Auth::check()){
+            die();
+                $oItem = Company::where('user_id',Auth::user()->id)->get();
+                $id_hoso = $oItem[0]->id_company;
+            }
     }
 
     /**

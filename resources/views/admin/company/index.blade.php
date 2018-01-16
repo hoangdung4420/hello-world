@@ -60,8 +60,8 @@
           <td>
               <a href="/admin/cong-viec" class="btn btn-success btn-block count-job">{{ $arItem->size }}</a>
           </td>
-          <td><a href="">chưa làm</a></td>
-          <td><a href="">chưa làm</a></td>
+          <td><a href="">{{ $arItem->like }}</a></td>
+          <td><a href="">{{ $arItem->dislike }}</a></td>
           <td>{{ $arItem->reader }}</td>
           <td>
               <a href="{{route('admin.company.edit',$id)}}"><span class="btn" ><i class="fa fa-mail-reply" aria-hidden="true" >Sửa</i></span></a>

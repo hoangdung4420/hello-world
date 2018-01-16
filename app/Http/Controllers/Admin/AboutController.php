@@ -9,6 +9,7 @@ class AboutController extends Controller
 {
     public function index()
     {
+        
     	$title = "Quản lý thông tin website";
     	$arItems = About::orderBy('social','DESC')->get();
     	return view('admin.about.index', ['title'=>$title, 'arItems' =>$arItems]);

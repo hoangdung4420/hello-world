@@ -61,6 +61,16 @@ Route::group(['namespace'=>'Plus'], function(){
 		'uses' => 'PlusController@ajaxDistrict',
 		'as' => 'plus.ajaxdistric'
 	]);
+
+	Route::post('addlike', [
+		'uses' => 'PlusController@addLike',
+		'as' => 'admin.addlike'
+	])->middleware('limit:1|2|3|4');
+
+	Route::post('adddislike', [
+		'uses' => 'PlusController@addDisLike',
+		'as' => 'admin.adddislike'
+	])->middleware('limit:1|2|3|4');
 	
 });
 
@@ -127,9 +137,9 @@ Route::group(['prefix'=>$name, 'namespace' => 'Admin', 'middleware' => 'auth'], 
 	Route::get('/', [
 		'uses' => 'IndexController@index',
 		'as' => 'admin.index.index'
-	]);
+	])->middleware('limit:1');
 
-	Route::group(['prefix'=>'about'], function (){
+	Route::group(['prefix'=>'about','middleware' => 'limit:1|2'], function (){
 		Route::get('/', [
 			'uses' => 'AboutController@index',
 			'as' => 'admin.about.index'
@@ -145,7 +155,7 @@ Route::group(['prefix'=>$name, 'namespace' => 'Admin', 'middleware' => 'auth'], 
 	
 	});
 
-	Route::group(['prefix'=>'category'], function(){
+	Route::group(['prefix'=>'category','middleware' => 'limit:1|2'], function(){
 		Route::get('/', [
 			'uses' => 'CategoryController@index',
 			'as' => 'admin.category.index'
@@ -276,17 +286,17 @@ Route::group(['prefix'=>$name, 'namespace' => 'Admin', 'middleware' => 'auth'], 
 		Route::get('/', [
 			'uses' => 'UserController@index',
 			'as' => 'admin.user.index'
-		]);
+		])->middleware('limit:1');
 
 		Route::get('add', [
 			'uses' => 'UserController@getAdd',
 			'as' => 'admin.user.add'
-		]);
+		])->middleware('limit:1');
 
 		Route::post('add', [
 			'uses' => 'UserController@postAdd',
 			'as' => 'admin.user.add'
-		]);
+		])->middleware('limit:1');
 
 		Route::get('edit/{id}', [
 			'uses' => 'UserController@getEdit',
@@ -300,7 +310,7 @@ Route::group(['prefix'=>$name, 'namespace' => 'Admin', 'middleware' => 'auth'], 
 		Route::get('del/{id}', [
 			'uses' => 'UserController@del',
 			'as' => 'admin.user.del'
-		]);
+		])->middleware('limit:1');
 	
 	});
 
@@ -319,7 +329,7 @@ Route::group(['prefix'=>$name, 'namespace' => 'Admin', 'middleware' => 'auth'], 
 		]);
 	});
 
-	Route::group(['prefix'=>'adv'], function (){
+	Route::group(['prefix'=>'adv','middleware' => 'limit:1|2'], function (){
 		Route::get('/', [
 			'uses' => 'AdvController@index',
 			'as' => 'admin.adv.index'

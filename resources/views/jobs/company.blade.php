@@ -18,8 +18,8 @@
 		 ?>
 	 	<div class="col-sm-3 company">
 			 <?php $picture = ($value->picture != '')?$value->picture:'vodanh.jpeg'; ?>
-			<a href="{{$urlCompany}}"><img src="/storage/app/files/{{ $picture }}" alt="" class="thumbnail img-responsive"></a>
-			<h3><a href="{{$urlCompany}}">Công ty {{ $value->fullname }}</a></h3>
+			<a  href="{{$urlCompany}}"><img src="/storage/app/files/{{ $picture }}" alt="" class="thumbnail img-responsive" id="img_company"></a>
+			<h3 id="company_title"><a href="{{$urlCompany}}">Công ty {{ $value->fullname }}</a></h3>
 			<p><span class="glyphicon glyphicon-map-marker"></span>Đà Nẵng | <span class="glyphicon glyphicon-folder-close"></span> IT-Phần mềm</p>
 			<button  class="btn btn-default"><span class="glyphicon glyphicon-eye-open"></span>Xem thêm</button>
 			<button  class="btn btn-default"><span class="fa fa-heart-o"></span> Khen ngợi</button>
@@ -45,8 +45,8 @@
 		</div>
 		@for($i=1;$i<=6;$i++)
 		<div class="col-sm-2 company">
-			<img src="{{$PublicUrl}}/img/member.jpg" alt="" class="thumbnail img-responsive">
-			<h4><a href="/detail_company">FPT-TELECOM</a></h4>
+			<img src="{{$PublicUrl}}/img/member.jpg" alt="" class="thumbnail img-responsive" id="img_company">
+			<h4 id="company_title"><a href="/detail_company">FPT-TELECOM</a></h4>
 			<p><span class="glyphicon glyphicon-map-marker"></span>Đà Nẵng | <span class="glyphicon glyphicon-folder-close"></span> IT-Phần mềm</p>
 			<button  class="btn btn-default"><span class="glyphicon glyphicon-eye-open"></span></button>
 			<button  class="btn btn-default"><span class="fa fa-heart-o"></span></button>
@@ -70,8 +70,8 @@
 		</div>
 		@for($i=1;$i<=6;$i++)
 		<div class="col-sm-2 company">
-			<img src="{{$PublicUrl}}/img/member.jpg" alt="" class="thumbnail img-responsive">
-			<h4><a href="/detail_company">FPT-TELECOM</a></h4>
+			<img src="{{$PublicUrl}}/img/member.jpg" alt="" class="thumbnail img-responsive" id="img_company">
+			<h4 id="company_title"><a href="/detail_company">FPT-TELECOM</a></h4>
 			<p><span class="glyphicon glyphicon-map-marker"></span>Đà Nẵng | <span class="glyphicon glyphicon-folder-close"></span> IT-Phần mềm</p>
 			<button  class="btn btn-default"><span class="glyphicon glyphicon-eye-open"></span></button>
 			<button  class="btn btn-default"><span class="fa fa-heart-o"></span></button>

@@ -19,44 +19,32 @@
             	</tr>
         	</thead>
             <tbody>
-                          	
+                 @foreach($arItems as $arItem)         	
                 <tr >
-                	<td>1</td>
+                	<td>{{ $arItem->id_comment }}</td>
                     <td>
-                        <img src="{{$PublicUrl}}/img/member.jpg" alt="" class="img-responsive" width="50px">
-                        <span>Mai Anh</span>
+                        <?php $picture = ($arItem->picture != '')?$arItem->picture:'vodanh.jpeg'; ?>
+                        <img src="/storage/app/files/{{ $picture }}" alt="" class="img-responsive" width="50px">
+                        <span>{{ $arItem->fullname }}</span>
                     </td>
                     <td>
-                        <p class="rep-comment">Trả lời cho: bcd</p>
-                        <span>Công việc này lương ít quá</span>
+                        @if($arItem->parent_id != 0)
+                        <p class="rep-comment">Trả lời cho: {{ $arItem->commentparent }}</p>
+                        @endif
+                        <span>{{ $arItem->content }}</span>
 
                         <p>
                            <a href="javascript:void(0)" data-toggle="modal" data-target="#myModal"><span class="btn" ><i class="fa fa-mail-reply" aria-hidden="true" >Trả lời</i></span></a>
                             <a href="" onclick="return confirm('Bạn có thật sự muốn xóa không?')"><span class="btn text-danger"><i class="fa fa-times" aria-hidden="true">Xóa</i></span></a>
                         </p>
                     </td>
-                    <td><a href="">Phó Tổng Giám Đốc Kinh Doanh BĐS Chủ Đầu Tư</a></td>
-                    <td>02/03/2017 06:17:23</td>
+                    <td><a href="{{ route('jobs.detail_job',['name'=>str_slug($arItem->job_name),'id'=>$arItem->job_id])}}">{{ $arItem->job_name }}</a></td>
+                    <td>{{ date('d-m-Y H:i:s', strtotime($arItem->created_at)) }}</td>
                 </tr>
-                <tr class="unread checked">
-                    <td>2</td>
-                    <td>
-                        <img src="{{$PublicUrl}}/img/member.jpg" alt="" class="img-responsive" width="50px">
-                        <span>Mai </span>
-                        <p>mai@gmail.com</p>
-                    </td>
-                    <td>
-                        <span>bcd</span>
-                        <p>
-                           <a href=""><span class="btn" ><i class="fa fa-mail-reply" aria-hidden="true" >Trả lời</i></span></a>
-                            <a href="" onclick="return confirm('Bạn có thật sự muốn xóa không?')"><span class="btn text-danger"><i class="fa fa-times" aria-hidden="true">Xóa</i></span></a>
-                        </p>
-                    </td>
-                    <td><a href="">Phó Tổng Giám Đốc Kinh Doanh BĐS Chủ Đầu Tư</a></td>
-                    <td>02/03/2017 06:17:23</td>
-                </tr>
+                @endforeach
             </tbody>
         </table>
+        {{ $arItems->links() }}
    </div> 
 </div>
 
