@@ -9,18 +9,58 @@
 		</div>
 		<div class="col-sm-8">
 			<h3>{{ $oItem->fullname }}</h3>
-			<p>456 Lượt xem </p>
+			<p>{{ $oItem->reader }} Lượt xem </p>
 			<p>
-				<span>{{ $oItem->like }}</span> <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-				<span>{{ $oItem->dislike }}</span><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+				<span id ="countFollow">{{ $oItem->follow }}</span> lượt theo dõi
 			 </p>
+		</div> 
+		<div class="col-sm-2 button" id="follow">
+			@if($checkFollow)
+				<button  class="btn btn-success btn-block btn-lg" onclick="changeFollow({{ $oItem->user_id }},0)">Đã Theo dõi</button>
+			@else 
+				<button  class="btn btn-default btn-block btn-lg" onclick="changeFollow({{ $oItem->user_id }},1)">Theo dõi</button>
+			@endif
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+  function changeFollow(id,status){
+  	@if(Auth::check())
+  		$.ajax({
+	        url: "{{ route('plus.changefollow') }}", 
+	        type: 'POST',
+	        dataType: 'html',
+	        data: {
+	            _token: '{{ csrf_token() }}',
+	            id:id, 
+	        },
+	        success: function(data){
+	            var a ='#follow';
+	            $(a).html(data);
+	            count = $('#countFollow').html();
+	            if(status==1){
+	            	count++;
+	            }else{
+	            	count--;
+	            }
+	            $('#countFollow').html(count);
+	        },
+	        error: function(){
+	          alert('Sai');
+	        }
+      });
+  	@else
+  		alert('Bạn phải đăng nhập để sử dụng chức năng này')
+  	@endif
+ }	    
+</script>
+<br>
 <div class=" detail_jop">
 	<div class="container">
-		<div class="rows">
-			<div class="col-sm-8"><h2>CƠ HỘI VIỆC LÀM</h2></div>
+		<div class="rows " >
+			<div class="col-sm-12"><h2>CƠ HỘI VIỆC LÀM</h2></div>
+			<div class="clearfix"></div>
+			<div class="pre-scrollable">
 			@foreach($listJob as $value)
 			<?php $url = route('jobs.detail_job', ['name'=>str_slug($value->title), 'id'=>$value->id_job ]) ?>
 			<div class="col-sm-12">
@@ -39,7 +79,7 @@
 			</div>
 			@endforeach
 		</div>
-
+		</div>
 		<div id="home" class="tab-pane fade in active">
 		    <div class="col-sm-8">
 		    	<h2>GIỚI THIỆU VỀ DOANH NGHIỆP</h2>

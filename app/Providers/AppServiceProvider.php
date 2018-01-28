@@ -13,6 +13,9 @@ use App\Time;
 use App\User;
 use App\Job;
 use App\About;
+use App\Follow;
+use App\Company;
+use App\Adv;
 use Auth;
 class AppServiceProvider extends ServiceProvider
 {
@@ -35,6 +38,8 @@ class AppServiceProvider extends ServiceProvider
         View::share('CategoryChilds', Category::where('parent_id','!=',0)->get());
         View::share('SumCompanies', User::where('level_id',3)->count());
         View::share('SumCandidates', User::where('level_id',4)->count());
+        View::share('AdvSlices', Adv::where('slice',1)->get());
+        View::share('RightbarSlices', Adv::where('slice',0)->inRandomOrder()->limit(2)->get());
         View::share('SumJobs', Job::count());
         $arAbout=About::all();
         foreach($arAbout as $ar){
@@ -46,6 +51,7 @@ class AppServiceProvider extends ServiceProvider
                 $oItem = Company::where('user_id',Auth::user()->id)->get();
                 $id_hoso = $oItem[0]->id_company;
             }
+            
     }
 
     /**

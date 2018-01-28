@@ -8,9 +8,15 @@
 			<?php $picture = ($oItem->picture != '')?$oItem->picture:'vodanh.jpeg'; ?>
 			<a href=""><img src="/storage/app/files/{{ $picture }}" alt="" class="thumbnail img-responsive"></a>
 		</div>
+
 		<div class="col-sm-8">
-			<h3>{{ $oItem->title }}</h3>
-			<p><a href="{{ route('jobs.detail_company', ['name'=>str_slug($oItem->fullname),'id'=>$oItem->user_id]) }}">{{ $oItem->fullname }}</a></p>
+			<?php
+				$id_job = $oItem->id_job; 
+				$titleJob = $oItem->title;
+				 $companyName = $oItem->fullname;
+			 ?>
+			<h3>{{ $titleJob }}</h3>
+			<p><a href="{{ route('jobs.detail_company', ['name'=>str_slug($companyName),'id'=>$oItem->user_id]) }}">{{ $companyName }}</a></p>
 			<?php 
 			$today = date('d-m-Y');
 			$dateOut = date('d-m-Y',strtotime($oItem->expired));
@@ -23,28 +29,36 @@
 			}
 
 			 ?>
-			<p>456 Lượt xem -  {{ $dem }}</p>
+			<p>{{ $oItem->reader }} Lượt xem -  {{ $dem }}</p>
 			<p id="like">
 				@if($checkLike)
-					<span>{{ $oItem->like }}<i class="fa fa-thumbs-up" aria-hidden="true" onclick="changeLike({{ $oItem->id_job }},2,1)"></i></span> 
+					<span>{{ $oItem->like }}<i class="fa fa-thumbs-up" aria-hidden="true" onclick="changeLike({{ $oItem->id_job }},1)"></i></span> 
 				@else 
-					<span>{{ $oItem->like }}<i class="fa fa-thumbs-o-up" aria-hidden="true" onclick="changeLike({{ $oItem->id_job }},2,1)"></i></span> 
+					<span>{{ $oItem->like }}<i class="fa fa-thumbs-o-up" aria-hidden="true" onclick="changeLike({{ $oItem->id_job }},1)"></i></span> 
 				@endif
 
 				@if($checkDisLike)
-					<span>{{ $oItem->dislike }}<i class="fa fa-thumbs-down" aria-hidden="true" onclick="changeLike({{ $oItem->id_job }},2,0)"></i></span> 
+					<span>{{ $oItem->dislike }}<i class="fa fa-thumbs-down" aria-hidden="true" onclick="changeLike({{ $oItem->id_job }},0)"></i></span> 
 				@else 
-					<span>{{ $oItem->dislike }}<i class="fa fa-thumbs-o-down" aria-hidden="true" onclick="changeLike({{ $oItem->id_job }},2,0)"></i></span> 
+					<span>{{ $oItem->dislike }}<i class="fa fa-thumbs-o-down" aria-hidden="true" onclick="changeLike({{ $oItem->id_job }},0)"></i></span> 
 				@endif
 			 </p>
 		</div>
+
 		<div class="col-sm-2 button">
-			<button  class="btn btn-danger btn-block btn-lg">Nộp đơn</button>
+		@if($checksendCV)
+			<button  class="btn btn-success btn-block btn-lg">Đã Ứng Tuyển</button>
+		@else
+			@if($today <= $dateOut)
+				<button  class="btn btn-danger btn-block btn-lg"  id="myBtnCV">Ứng Tuyển</button>
+			     @include('jobs.formsendcv')
+			@endif
+		@endif 
 		</div>
 	</div>
 </div>
 <script type="text/javascript">
-  function changeLike(id,oitem,status){
+  function changeLike(id,status){
   	@if(Auth::check())
   		$.ajax({
 	        url: "{{ route('admin.addlike') }}", 
@@ -53,7 +67,6 @@
 	        data: {
 	            _token: '{{ csrf_token() }}',
 	            id:id, 
-	            oitem:oitem,
 	            status:status,
 	        },
 	        success: function(data){
@@ -90,8 +103,20 @@
 				<br>
 				<ul class="list-group">
 				  <li class="list-group-item">
+				  	<h4><span class="glyphicon glyphicon-calendar"></span> Hạn nộp đơn:</h4>
+				  	<p > {{ $dateOut }}</p>
+				  </li>
+				  <li class="list-group-item">
 				  	<h4><span class="glyphicon glyphicon-user"></span> Cấp bậc:</h4>
 				  	<p >{{ $oItem->job_level }}</p>
+				  </li>
+				  <li class="list-group-item">
+				  	<h4><span class="glyphicon glyphicon-time"></span> Loại hình công việc:</h4>
+				  	<p >{{ $oItem->time_id }}</p>
+				  </li>
+				  <li class="list-group-item">
+				  	<h4><span class="fa fa-money"></span> Lương:</h4>
+				  	<p >{{  (empty($value->salary))?'Thỏa thuận':number_format($value->salary,0,'.',',')  }}</p>
 				  </li>
 				  <li class="list-group-item">
 				  	<h4><span class="glyphicon glyphicon-folder-close"></span> Ngành nghề:</h4>
@@ -107,13 +132,7 @@
 				  	<p >SĐT: {{ $oItem->phone }}</p>
 				  	<p >Email: {{ $oItem->email }}</p>
 				  </li>
-				   <li class="list-group-item">
-				  	<h4><span class="glyphicon glyphicon-calendar"></span> Hạn nộp đơn:</h4>
-				  	<p > {{ $dateOut }}</p>
-				  </li>
-				  <li class="list-group-item">
-				  	<button  class="btn btn-block btn-danger btn-lg">Nộp đơn</button>
-				  </li>
+				   
 				</ul>
 			</div>	
 			<div class="clearfix"></div>
@@ -124,7 +143,7 @@
 				<div class="list-group-item">
 					<!--viec con thoi han-->
 					<h4><a href="/detail_job">{{ $value->title }}</a></h4>
-					<span>{{ number_format($value->salary,0,'.',',') }} | {{ $value->address }} | 1 ngày trước(chưa xử lí)</span>
+					<span>Lương:{{ (empty($value->salary))?'Thỏa thuận':number_format($value->salary,0,'.',',') }} | {{ $value->address }} | 1 ngày trước(chưa xử lí)</span>
 				</div>
 			@endforeach	
 		    </div>

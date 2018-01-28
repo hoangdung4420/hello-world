@@ -111,8 +111,14 @@ class UserController extends Controller
     public function getEdit($id = 0)
     {
     	$title = "Quản lý người dùng";
-    	$oItem = $this->mUser->findOrFail($id);
-    	return view('admin.user.edit', ['title' => $title, 'oItem' => $oItem]);
+        if(Auth::user()->level_id > 2 && Auth::user()->id != $id){
+           return redirect()->route('admin.user.edit',Auth::user()->id);
+        }
+    	 $oItem = $this->mUser->findOrFail($id);
+         if($oItem->level_id == 1){
+            return redirect()->route('admin.user.edit',Auth::user()->id);
+         }
+          return view('admin.user.edit', ['title' => $title, 'oItem' => $oItem]);
     }
 
     public function postEdit($id, UserEditRequest $request)
@@ -220,8 +226,9 @@ class UserController extends Controller
                 $company = $this->mCompany->where('user_id',$oItem->id)->get();
                 $company[0]->delete();
             }elseif($oItem->level_id == 4){
-                //bổ sung xóa file pdf
+                //bổ sung xóa file pdf, cv_file trong bảng files và bảng listjob
                 $file = $this->mFile->where('user_id',$oItem->id)->get();
+                Storage::delete('cv/'.$file[0]->cv_file);
                 $file[0]->delete();
             }
                

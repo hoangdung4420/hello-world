@@ -1,9 +1,14 @@
 @extends('templates.jobs.master')
-
+@section('ui')
+<link rel="stylesheet" href="/resources/assets/css/jquery-ui.css">
+  <script src="/resources/assets/js/jquery-ui.js"></script>
+ <!--  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+@stop
 @section('content')
 
 @include('templates.jobs.slide')
-
+</form>
 @include('templates.jobs.sumary')
 
 <div class="content-page">
@@ -11,7 +16,8 @@
   	<div class="col-sm-8 col-sx-8">
   		<div class="panel panel-default">
 		  <div class="panel-body">
-		    <h4>Việc làm theo ngành nghề</h4>
+		    <h4 style="text-transform: uppercase;">Việc làm theo ngành nghề </h4>
+		     
 		  </div>
 		  <div class="panel-footer list-cate">
 		  	<div class="col-sm-4">
@@ -50,7 +56,7 @@
 		</div>
 		<div class="panel panel-default">
 		  <div class="panel-body">
-		  		<h4>Gợi ý việc làm</h4>
+		  		<h4 style="text-transform: uppercase;">Gợi ý việc làm</h4>
 		  	</div>
 		  <div class="panel-footer ">
 		  	@foreach($arJobs as $arJob)
@@ -67,7 +73,7 @@
 		  					$name_slug = str_slug($arJob->title);
 		  					$url = route('jobs.detail_job',['name'=>$name_slug, 'id'=>$arJob->id_job]);
 	  					 ?>
-						<h4><a href="{{ $url }}">{{ $arJob->title }}</a></h4>
+						<h4><a href="{{ $url }}">{{ str_limit($arJob->title,50) }}</a></h4>
 						<span>{{ $arJob->fullname }}</span>
 					</div>
 					<div class="clearfix"></div>
@@ -76,7 +82,6 @@
 			@endforeach
 
 			<div class="clearfix"></div>
-			<br>
 		  </div>
 		</div>	
 
@@ -84,10 +89,10 @@
 
 	<div class="col-sm-4 col-sx-4">
 		<div class="panel panel-default">
-		  <div class="panel-body">
-		  		<h4><a href="">Công ty tuyển dụng hàng đầu</a>  <span>Xem thêm>></span></h4>
+		  <div style="border-top: 2px solid #000">
+		  		<h4 class="alert" style="margin-bottom:0px"><a href="{{ route('jobs.company') }}"><span style="text-transform: uppercase;">Công ty tuyển dụng hàng đầu</a> </h4>
 		  	</div>
-		  <div class="panel-footer ">
+		  <div>
 		  	@foreach($arCompanies as $arCompany)
 		    <div class="col-sm-6">
 				<?php 
@@ -101,6 +106,40 @@
 			<div class="clearfix"></div>
 		  </div>
 		</div>	
+		<div class="panel panel-default">
+		  <div  style="border-top: 2px solid #000">
+		  		<h4 ><span style="text-transform: uppercase;">Công việc Tuyển gấp</span><br></h4>
+		  	</div>
+		  <div >
+		  	@foreach($arCompanies as $arCompany)
+		    <div class="col-sm-12">
+				<?php 
+		            $name_slug = str_slug($arCompany->fullname);
+					$url = route('jobs.detail_company',['name'=>$name_slug, 'id'=>$arCompany->id]);
+               ?>
+				<h5><a href="{{ $url }}">bvac</a></h5>
+			</div>
+			@endforeach
+			<div class="clearfix"></div>
+		  </div>
+		</div>
+		<div class="panel panel-default">
+		  <div  style="border-top: 2px solid #000">
+		  		<h4 ><span style="text-transform: uppercase;">Công việc lương cao</span><br></h4>
+		  	</div>
+		  <div >
+		  	@foreach($arCompanies as $arCompany)
+		    <div class="col-sm-12">
+				<?php 
+		            $name_slug = str_slug($arCompany->fullname);
+					$url = route('jobs.detail_company',['name'=>$name_slug, 'id'=>$arCompany->id]);
+               ?>
+				<h5><a href="{{ $url }}">bvac</a></h5>
+			</div>
+			@endforeach
+			<div class="clearfix"></div>
+		  </div>
+		</div>
 	</div>
   	<div class="clearfix"></div>
 </div>

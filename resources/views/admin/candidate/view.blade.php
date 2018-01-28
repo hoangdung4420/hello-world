@@ -115,8 +115,15 @@
     </div>
 <div class="clearfix"></div>   
 <div class="form-group">
-        <label class="control-label col-sm-2" >CV: </label>
+        <label class="control-label col-sm-3" >CV: </label>
+         @if($oItem->cv_file != '')
+       <iframe  src="/storage/app/cv/{{ $oItem->cv_file }}" class="col-sm-9" style="height: 600px"></iframe> 
+      @endif
+      <div class="clearfix"></div>
+      <br>
+<br>
     </div>
+
 </div>
 
 @stop

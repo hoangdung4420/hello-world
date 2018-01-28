@@ -9,11 +9,14 @@ a:hover{
 	padding-left: 2px;
 	padding-right: 2px;
 }
-#formSearch input,#formSearch select{
+#formSearch input{
 	height: 55px;
-
 }
-
+#formSearch select{
+	height: 55px;
+	padding: 0px;
+	margin: 0px;
+}
 li.well{
 	padding-bottom: 20px;
 	margin-bottom: 0px;
@@ -60,7 +63,9 @@ div.content-page div.row:hover{
 }
 div.content-page div.adv{
 	padding:10px !important;
+	margin-top: 15px;
 }
+
 div.content-page div.adv:hover{
 	background: #eee;
 }
@@ -126,14 +131,15 @@ div.button{
 }
 .list-cate ul li{
 	line-height: 25px;
-}			
-#level_user{
+}		
+.myBtnLg{
 	color:#fff !important;
 	border: 2px solid #000;
 	border-radius: 0px;
 	text-transform: uppercase;
+	padding: 12px 10px;
 }
-#level_user:hover{
+.myBtnLg:hover{
 	color:#000 !important;
 }
 #company_title{
@@ -147,4 +153,7 @@ div.button{
 }
 #img_company_mini{
 	height: 130px;
+}
+label.form-check-label{
+	font-weight: normal !important;
 }

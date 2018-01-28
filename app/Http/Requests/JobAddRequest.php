@@ -25,7 +25,7 @@ class JobAddRequest extends FormRequest
         return [
             'title' =>'required',
             'address' =>'required',
-            'salary' => 'required',
+            
             'expired' => 'required',
             'agency' => 'required',
             'email' => 'required',
@@ -40,7 +40,7 @@ class JobAddRequest extends FormRequest
         return [
             'title.required' =>'Bạn cần phải nhập tiêu đề' ,
             'address.required' =>'Bạn cần phải nhập địa chỉ',
-            'salary.required' =>'Bạn cần phải nhập mức lương',
+            
             'expired.required' =>'Bạn cần phải nhập hạn nộp hồ sơ',
             'agency.required' =>'Bạn cần phải nhập tên người liên hệ',
             'email.required' =>'Bạn cần phải nhập email liên hệ',

@@ -11,6 +11,7 @@
 <div class="container panel">
     <br>
 <div class="col-sm-3">
+@if(Auth::user()->level_id == 1)
   <div class="panel-default">
     <div class="panel-body" id="form_cat">
       <form action="{{ route('admin.category.add') }}" method="POST">
@@ -48,6 +49,7 @@
       </form>
     </div>
   </div>
+@endif
 <div class="panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">Danh mục cha</h3>
@@ -70,7 +72,9 @@
         		<th>STT</th>
         		<th>Tên danh mục
             </th>
+            @if(Auth::user()->level_id == 1)
         		<th>Chức năng</th>
+            @endif
         	</tr>
     	</thead>
         <tbody>
@@ -93,24 +97,25 @@
                         <tr>
                             <td>*</td>
                             <td width="50%">{{$CategoryChild->name}}</td>
+                            @if(Auth::user()->level_id == 1)
                             <td width="40%">
-                             
                               <a href="javascript:void(0)" onclick="editCat({{$idC}})"><span class="btn"><i class="fa fa-eye" aria-hidden="true">Sửa</i></span></a>
                               <a href="{{ route('admin.category.del',$idC) }}" onclick="return confirm('Bạn có thật sự muốn xóa không?')"><span class="btn text-danger"><i class="fa fa-times" aria-hidden="true">Xóa</i></span></a>
 
                          	</td>
+                          @endif
                         </tr>
                        @endif
                        @endforeach
 
                     </table>
                 </td>
-                
+                @if(Auth::user()->level_id == 1)
                 <td>
                 	<a href="javascript:void(0)" onclick="editCat({{$id}})"><span class="btn btn-success"><i class="fa fa-eye" aria-hidden="true">Sửa</i></span></a>
                     <a href="{{ route('admin.category.del',$id) }}" onclick="return confirm('Tất cả danh mục con cũng sẽ bị xóa. Bạn có thật sự muốn xóa danh mục này không?')"><span class="btn btn-danger"><i class="fa fa-times" aria-hidden="true">Xóa</i></span></a>
                 </td>
-
+                @endif
             </tr>
             @endforeach
         </tbody>

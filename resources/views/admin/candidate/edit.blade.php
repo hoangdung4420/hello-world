@@ -10,7 +10,7 @@
       <div class="alert alert-warning">{{ Session::get('msgW') }}</div>
     @endif
   </div>
-  <form class="form-horizontal" action="{{route('admin.candidate.edit',$oItem->id_file)}}" method="POST">
+  <form class="form-horizontal" action="{{route('admin.candidate.edit',$oItem->id_file)}}" method="POST" enctype="multipart/form-data">
  {{ csrf_field() }}
     @if ($errors->any())
       <div class="alert alert-danger">
@@ -184,11 +184,18 @@
     <div class="form-group">
         <label class="control-label col-sm-2" >CV:</label>
         <div class="col-sm-5">          
-           <input type="file" class="btn btn-default" id="exampleInputFile1" name="picture">
+           <input type="file" class="btn btn-default" id="exampleInputFile1" name="cv_file">
             <p class="help-block"><em>Định dạng: pdf, dưới 250kb</em></p>
         </div>
+        <div class="clearfix"></div>
     </div>
-    
+    <div class="form-group">
+        <label class="control-label col-sm-3" ></label>
+       @if($oItem->cv_file != '')
+       <iframe  src="/storage/app/cv/{{ $oItem->cv_file }}" class="col-sm-8" style="height: 600px"></iframe> 
+      @endif
+     </div> 
+      
     <div class="form-group">        
       <div class="col-sm-offset-2 col-sm-4">
         <div class="checkbox">

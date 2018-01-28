@@ -1,3 +1,5 @@
 	<div class="adv">
-		<a href=""><img src="{{$PublicUrl}}/img/adv.jpg" class="img-thumbnail" alt="Cinque Terre"></a>
+		@foreach($RightbarSlices as $val)
+			<a href="{{ $val->link }}"><img src="/storage/app/files/{{$val->picture}}" alt="Los Angeles" class="img-responsive"></a>
+		@endforeach
 	</div>

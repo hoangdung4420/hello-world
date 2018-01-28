@@ -1,5 +1,10 @@
 @extends('templates.jobs.master')
-
+@section('ui')
+<link rel="stylesheet" href="/resources/assets/css/jquery-ui.css">
+  <script src="/resources/assets/js/jquery-ui.js"></script>
+ <!--  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+@stop
 @section('content')
 
 @include('templates.jobs.slide')
@@ -8,6 +13,7 @@
 
 <div class="content-page">
   	@include('templates.jobs.leftbar')
+  	</form>
   	<div class="col-sm-8 col-sx-8">
   		<div class="title">
 			<h3>{{ $sum or 'Rất nhiều' }} việc làm cho {{ $title or 'bạn' }}</h3>
@@ -27,7 +33,7 @@
 			<div class="col-sm-9">
 				<h3><a href="{{ $urlJob }}">{{ $value->title }}</a></h3>
 				<p><a href="{{ $urlCompany }}">Công ty {{ $value->fullname }}</a></p>
-				<p><span class="fa fa-money"></span>{{ number_format($value->salary,0,'.',',') }} | <span class="glyphicon glyphicon-calendar"></span>{{ date("d-m-Y", strtotime($value->expired)) }} | <span class="glyphicon glyphicon-map-marker"></span>Đà Nẵng</p>
+				<p><span class="fa fa-money"></span>{{ (empty($value->salary))?'Thỏa thuận':number_format($value->salary,0,'.',',') }} | <span class="glyphicon glyphicon-calendar"></span>{{ date("d-m-Y", strtotime($value->expired)) }} | <span class="glyphicon glyphicon-map-marker"></span>{{ $value->address }}</p>
 				<!-- <button  class="btn btn-default">Markerting</button>
 				<button  class="btn btn-default">Sales</button>
 				<button  class="btn btn-default">Tiếng Anh</button> -->
@@ -35,10 +41,12 @@
 			</div>
 			<div class="col-sm-1 ">
 				<br>
+				@if(date("d-m-Y", strtotime($value->updated_at)) == date("d-m-Y"))
 				<button class="btn btn-danger">Mới</button>
 				<br>
+				@endif
 				<br>
-				<button  class="btn btn-default"><i class="fa fa-heart-o fa-2x" aria-hidden="true"></i></button>
+				
 			</div>
 			<div class="clearfix"></div>
 			<br>
@@ -55,4 +63,5 @@
 
   	<div class="clearfix"></div>
 </div>
+
 @stop

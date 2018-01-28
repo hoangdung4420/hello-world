@@ -1,3 +1,4 @@
+
 <div id="myCarousel" class="carousel slide" data-ride="carousel"  >
   
   <ol class="carousel-indicators">
@@ -7,20 +8,7 @@
   </ol>
 
   <!-- Wrapper for slides -->
-  <div class="carousel-inner" >
-    <div class="item active">
-      <img src="{{$PublicUrl}}/img/slide2.jpg" alt="Los Angeles" class="img-responsive">
-    </div>
-
-    <div class="item">
-      <img src="{{$PublicUrl}}/img/slide2.jpg" alt="Chicago" class="img-responsive">
-    </div>
-
-    <div class="item">
-      <img src="{{$PublicUrl}}/img/slide2.jpg" alt="New York" class="img-responsive">
-    </div>
-
-  </div>
+ @include('templates.jobs.imgslice')
 
   <!-- Left and right controls -->
   <a class="left carousel-control" href="#myCarousel" data-slide="prev">
@@ -31,20 +19,57 @@
     <span class="glyphicon glyphicon-chevron-right"></span>
     <span class="sr-only">Next</span>
   </a>
-   <div class="carousel-caption " >
-	<form action="" id="formSearch">
+   <div class="carousel-caption "  style="background: #eef;padding: 20px" >
+	<form action="{{route('jobs.searchcompany')}}" id="formSearch" method="GET">
+    @if ($errors->any())
+      <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div>
+      @endif
 	    <div class="col-sm-3 col-xs-3">
-	      <input class="form-control" id="focusedInput" type="text" placeholder ="Tên công ty">
+	      <input class="form-control"  type="text" id="name" name="name" placeholder ="Tên công ty">
 	    </div>
-	    <div class="col-sm-3 col-xs-3">
-		  <input class="form-control" id="focusedInput" type="text" placeholder ="Tất cả ngành nghề">
+
+	    <div class="col-sm-4 col-xs-4 ui-widget">
+		  <input class="form-control"  type="text" id="category" name="category" placeholder ="Tất cả ngành nghề">
 	    </div>
-	    <div class="col-sm-3 col-xs-3">
-		  <input class="form-control" id="focusedInput" type="text" placeholder ="Tất cả địa điểm">
+	    <div class="col-sm-2 col-xs-2 ui-widget">
+		  <input class="form-control"  type="text" id="cities" name="cities" placeholder ="Tất cả địa điểm">
 	    </div>
-	    <div class="col-sm-3 col-xs-3">
+      <div class="col-sm-1 col-xs-1">
+        <input class="form-control btn btn-default" type="reset" value="X">
+      </div>
+	    <div class="col-sm-2 col-xs-2">
 	      <input class="form-control btn btn-danger" type="submit" value="Tìm kiếm">
 	    </div>
 	</form>
 </div>
 </div>
+<script>
+$(function() {
+    $( "#cities" ).autocomplete({ 
+      source: "{{route('plus.autocompleteprovince')}}",
+    });
+});
+</script>
+<script>
+$(function() {
+    $( "#category" ).autocomplete({ 
+      source: "{{route('plus.autocompletecategory')}}",
+    });
+});
+</script>
+@if(isset($key))
+<script>
+  window.onload = function()
+{
+    $("#name").val("{{$key['name']}}");
+    $("#category").val("{{$key['category']}}");
+    $("#cities").val("{{$key['cities']}}");
+};
+</script>
+@endif

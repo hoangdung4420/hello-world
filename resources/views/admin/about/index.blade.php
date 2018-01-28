@@ -10,7 +10,9 @@
                     <tr class="active">
                         <th>Tên</th>
                         <th>Nội dung</th>
+                         @if(Auth::user()->level_id == 1)
                         <th>Chức năng</th>
+                        @endif
                     </tr>
                 </thead>
                  @foreach($arItems as $arItem)            
@@ -21,9 +23,11 @@
                       <td> 
                         {!! $arItem->detail !!}
                       </td>
+                       @if(Auth::user()->level_id == 1)
                       <td>
                           <a href="{{route('admin.about.edit',$arItem->id_about)}}" ><span class="btn" ><i class="fa fa-mail-reply" aria-hidden="true" >Sửa</i></span></a>
                       </td>
+                      @endif
                   </tr>
                   @endforeach
               </tbody>

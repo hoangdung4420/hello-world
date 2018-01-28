@@ -13,7 +13,7 @@
     }
 
    ?>
-  <form action="javascript:void(0)" class="contact_form" method="post" id="comment" form="comment" >
+  <form action="javascript:void(0)" class="contact_form" method="post"  form="comment" >
     <div class="col-sm-6">
       <div class="form-group">
         <input type="text" name="hoten" class="form-control hoten" {{$readonly or ''}} required="" placeholder="Nhập họ tên" value="{{$hoten}}">
@@ -101,7 +101,7 @@
            <!--form trả lời-->
              <div class="rep-form{{$parent->id_comment}} col-sm-offset-2" style="display:none; padding-bottom: 10px" >
 
-                <form action="javascript:void(0)" class="contact_form" method="post" id="comment" form="comment" >
+                <form action="javascript:void(0)" class="contact_form" method="post"  form="comment" >
                   <div class="col-sm-6">
                     <div class="form-group">
                       <input type="text" name="hoten" class="form-control hoten{{$parent->id_comment}}"  required="" {{$readonly or ''}} placeholder="Nhập họ tên" value="{{$hoten}}">
@@ -163,11 +163,13 @@
         }else{
           $("ul.comment-list li:eq(0)").before(data);
         } 
+        @if(!Auth::check())
         $(".hoten").val("");
         $(".email").val("");
+         @endif
         $(".content").val("");
       },
-      error: function (){
+      error: function (){ 
          alert('có lỗi');
       }
     });

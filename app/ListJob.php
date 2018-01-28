@@ -8,5 +8,11 @@ class ListJob extends Model
 {
     protected $table = 'list_jobs';
     protected $primaryKey = 'id_listjob';
-    protected $fillable = ['job_id','user_id','cv_file','status','note','created_at','updated_at'];
+    protected $fillable = ['job_id','user_id','cv_file','status','note','sendmail','company_del','candidate_del','created_at','updated_at'];
+
+    public function totalCvOfJob($id)
+    {
+    	return $this->where('job_id',$id)->count();
+    }
 }
+ 

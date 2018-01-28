@@ -148,16 +148,12 @@
         </div>
       </div>
       <label class="control-label col-sm-1" >Lượt đọc:</label>
-      <div class="col-sm-1">
+      <div class="col-sm-2">
         <input type="number" class="form-control" value="{{$oItem->reader}}" name="reader" >
       </div>
-      <label class="control-label col-sm-1" >Lượt like:</label>
-      <div class="col-sm-1">
-        <input type="number" class="form-control" value="chưa làm" name="liked" >
-      </div>
-      <label class="control-label col-sm-2" >Lượt dislike:</label>
-      <div class="col-sm-1">
-        <input type="number" class="form-control" value="chưa làm" name="disliked" >
+      <label class="control-label col-sm-2" >Lượt theo dõi:</label>
+      <div class="col-sm-2">
+         <label>{{ $oItem->follow }}</label>
       </div>
     </div>
 @else 
@@ -168,16 +164,12 @@
         </div>
       </div>
       <label class="col-sm-1" >Lượt đọc:</label>
-      <div class="col-sm-1">
+      <div class="col-sm-2">
         <label>{{$oItem->reader}}</label>
       </div>
-      <label class=" col-sm-1" >Lượt like:</label>
-      <div class="col-sm-1">
-        <label>chưa làm</label>
-      </div>
-      <label class=" col-sm-2" >Lượt dislike:</label>
-      <div class="col-sm-1">
-        <label>chưa làm</label>
+      <label class=" col-sm-2" >Lượt theo dõi:</label>
+      <div class="col-sm-2">
+        <label>{{ $oItem->follow }}</label>
       </div>
     </div>
 @endif    

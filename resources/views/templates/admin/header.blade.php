@@ -9,6 +9,9 @@
   <link rel="stylesheet" href="{{$PublicUrl}}/css/main.css">
 	<link rel="stylesheet" href="{{$AdminUrl}}/css/styles.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+  <script src="/resources/assets/js/jquery-3.2.1.min.js"></script>
+  <script src="/resources/assets/js/jquery.validate.min.js"></script>
+  @yield('ui')
   @yield('ckeditor')
 </head>
 <body>
@@ -24,6 +27,19 @@
           <a class="navbar-brand " href="{{ route('admin.index.index') }}">YOUR-WORK </a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
+          <?php 
+          if(Auth::user()->level_id != 4){
+            $ungvien = 'Ứng viên';
+          }else{
+            $ungvien = 'Hồ sơ';
+          }
+          if(Auth::user()->level_id >2){
+            $nguoidung = 'Tài khoản';
+          }else{
+            $nguoidung = 'Người dùng';
+          }
+            
+           ?>
           <ul class="nav navbar-nav">
             @if(Auth::user()->level_id <= 2)
             <li class="{{ Request::is('*about*')?'active':''}}"><a href="{{ route('admin.about.index') }}">Thông tin</a></li>
@@ -31,8 +47,8 @@
             @endif
             <li class="{{Request::is('*job*')?'active':''}}"><a href="{{route('admin.job.index')}}">Công việc</a></li>
             <li class ="{{ Request::is('*company*')?'active':''}}"><a href="{{route('admin.company.index')}}">Công ty</a></li>
-            <li class ="{{ Request::is('*candidate*')?'active':''}}"><a href="{{ route('admin.candidate.index') }}">Ứng viên</a></li>
-            <li class ="{{ Request::is('*user*')?'active':''}}"><a href="{{ route('admin.user.index') }}">Người dùng</a></li>
+            <li class ="{{ Request::is('*candidate*')?'active':''}}"><a href="{{ route('admin.candidate.index') }}">{{$ungvien}}</a></li>
+            <li class ="{{ Request::is('*user*')?'active':''}}"><a href="{{ route('admin.user.index') }}">{{$nguoidung}}</a></li>
             <li class ="{{ Request::is('*comment*')?'active':''}}"><a href="{{route('admin.comment.index')}}">Bình luận</a></li>
             <li class ="{{ Request::is('*contact*')?'active':''}}"><a href="{{route('admin.contact.index')}}">Liên hệ</a></li>
             @if(Auth::user()->level_id <= 2)
@@ -52,9 +68,9 @@
                 @else(Auth::user()->level_id == 4) 
                 <li><a href="{{route('admin.candidate.index')}}"><span  class="btn btn-warning btn-block">Hồ sơ</a></a></li>
                 @endif
-                <li><a href="{{route('admin.job.index')}}">Công việc<span class="badge pull-right">3</span></a></li>
-                <li><a href="{{route('admin.contact.index')}}">Liên hệ<span class="badge pull-right">3</span></a></li>
-                <li><a href="{{route('admin.comment.index')}}">Bình luận<span class="badge pull-right">3</span></a></li>
+                <li><a href="{{route('admin.job.index')}}">Công việc</a></li>
+                <li><a href="{{route('admin.contact.index')}}">Liên hệ</a></li>
+                <li><a href="{{route('admin.comment.index')}}">Bình luận</a></li>
                 <li><a href="{{ route('jobs.index') }}">Trang public</a></li>
               </ul>
             </li>

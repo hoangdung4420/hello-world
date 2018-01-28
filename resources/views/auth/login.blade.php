@@ -30,7 +30,7 @@
 			<h3 class="panel-title text-center">Đăng nhập</h3>
 		</div>
 		<div class="panel-body">
-			<form action="{{ route('login') }}" method="POST">
+			<form action="{{ route('loginn') }}" method="POST">
 				{{ csrf_field() }}
 			    <div class="form-group">
 				  <input class="form-control"  type="text" name="email" placeholder ="Email">
@@ -41,7 +41,7 @@
 			    <div class="">
 			    	<input class="form-control btn btn-danger" type="submit" value="Gửi">
 			    </div>
-			</form>
+			</form> 
 		</div>
 	</div>
 @if(Request::is('*company*') || Request::is('*candidate*'))
@@ -50,7 +50,7 @@
 			<h3 class="panel-title text-center"><span style="color: #000">Bạn chưa có tài khoản? </span>Đăng ký miễn phí</h3>
 		</div>
 		<div class="panel-body">
-			<form action="{{ route('auth.register') }}" method="POST" >
+			<form action="{{ route('auth.signupcom') }}" method="POST" >
 				{{ csrf_field() }}
 			      @if ($errors->any())
 			        <div class="alert alert-danger">

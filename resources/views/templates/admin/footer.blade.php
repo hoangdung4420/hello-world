@@ -19,7 +19,7 @@
 			<li><a href="">Tất cả công việc</a></li>
 			<li><a href="">Công ty</a></li>
 			<li><a href="">Liên hệ</a></li>
-			<li><a href="{{route('auth.login')}}">Nhân viên Đăng nhập</a></li>
+			<li><a href="{{route('login')}}">Nhân viên Đăng nhập</a></li>
 		</ul>
 		
 	</div>
@@ -71,7 +71,7 @@ function topFunction() {
 }
 </script>
 
-	<script src="/resources/assets/js/jquery-3.2.1.min.js"></script>
+	
 	<script src="/bootstrap/js/bootstrap.min.js"></script>
 
 </body>

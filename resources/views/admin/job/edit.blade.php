@@ -5,7 +5,7 @@
 @stop
 @section('content')
 <div class="container panel">
-  <br>
+  <br> 
   
    @if(Session::get('msgS') != null)
        <div class="alert alert-success">{{ Session::get('msgS') }}</div>
@@ -87,11 +87,12 @@
       </div>
     </div>
 
-    <div class="form-group">
+   <div class="form-group">
       <label class="control-label col-sm-2" >Mức lương:</label>
-      <div class="col-sm-10" > 
-         <input type="text" class="form-control" required="" placeholder="5000000" name="salary" value="{{$oItem->salary}}">        
+      <div class="col-sm-7" > 
+         <input type="text" class="form-control" placeholder="5000000" name="salary" value="{{$oItem->salary}}">       
       </div>
+      <div class="col-sm-3"> <input type="checkbox"  name="salaryagree" {{(empty($oItem->salary))?'checked':''}} value="0">Thỏa thuận sau</div>
     </div>
 
     <div class="form-group">

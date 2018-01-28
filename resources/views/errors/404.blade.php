@@ -12,7 +12,7 @@
         </div>
         <div class="col-sm-6">
             <h1><b>OPPS!</b> Trang bạn tìm không tồn tại</h1>
-            <h2><a href="">Trở lại trang chủ</a></h2>
+            <h2><a href="/" style="color:#49c29f">Trở lại trang chủ</a></h2>
         </div>
     </div>
     <div class="col-sm-2"></div>

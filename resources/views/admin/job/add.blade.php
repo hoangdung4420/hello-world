@@ -85,9 +85,10 @@
 
     <div class="form-group">
       <label class="control-label col-sm-2" >Mức lương:</label>
-      <div class="col-sm-10" > 
-         <input type="text" class="form-control" required="" placeholder="5000000" name="salary">        
+      <div class="col-sm-7" > 
+         <input type="text" class="form-control" placeholder="5000000" name="salary"> 
       </div>
+      <div class="col-sm-3"> <input type="checkbox"  name="salaryagree" checked value="0">Thỏa thuận sau</div>
     </div>
 
     <div class="form-group">
